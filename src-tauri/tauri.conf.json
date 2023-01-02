@@ -62,7 +62,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "pokedex-tauri-app",
+        "title": "ポケモン図鑑",
         "width": 800
       }
     ]
