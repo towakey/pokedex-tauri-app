@@ -1,7 +1,27 @@
 <template>
-  <div>
-    <h1>pages/index.vue</h1>
-    <v-btn class="ma-5" color="primary">Primary</v-btn>
-    <v-btn class="ma-5" color="secondary">Secondary</v-btn>
-  </div>
+  <v-container class="bg-surface-variant">
+    <v-row>
+      <v-col>
+        <NuxtLink
+          :to="{path: '/Paldea'}"
+        >
+          <v-card>
+            <v-card-title>パルデア図鑑</v-card-title>
+          </v-card>
+        </NuxtLink>
+      </v-col>
+    </v-row>
+    <!-- <v-row no-gutters>
+      <v-col>
+        <v-card class=".v-col-auto">
+          <v-card-title>カント―図鑑</v-card-title>
+        </v-card>
+      </v-col>
+      <v-col>
+        <v-card class=".v-col-auto">
+          <v-card-title>ジョウト図鑑</v-card-title>
+        </v-card>
+      </v-col>
+    </v-row> -->
+  </v-container>
 </template>
