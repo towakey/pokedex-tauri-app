@@ -1,3 +1,7 @@
+<!-- <script setup lang="ts">
+  const route = useRoute()
+  useHead({ title: route.meta.title as string })
+</script> -->
 <script>
   export default {
     data: () => ({
@@ -17,13 +21,17 @@
         //   value: 'bar',
         // },
       ],
+      title: "ポケモン図鑑"
     }),
-
     watch: {
       group () {
         this.drawer = false
       },
     },
+    created () {
+      // const route = useRoute()
+      // this.title = route.meta.title
+    }
   }
 </script>
 <template>
@@ -36,11 +44,11 @@
         prominent
       >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>ポケモン図鑑</v-toolbar-title>
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer></v-spacer>
-        <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn>
-        <v-btn variant="text" icon="mdi-filter"></v-btn>
-        <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
+        <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn> -->
+        <!-- <v-btn variant="text" icon="mdi-filter"></v-btn> -->
+        <!-- <v-btn variant="text" icon="mdi-dots-vertical"></v-btn> -->
       </v-app-bar>
       <v-navigation-drawer
         v-model="drawer"
@@ -52,7 +60,7 @@
           :to="{path: `/${item.value}`}"
         >
           <v-list nav>
-            <v-list-item>
+            <v-list-item prepend-icon="mdi-scale">
               {{ item.title }}
             </v-list-item>
           </v-list>

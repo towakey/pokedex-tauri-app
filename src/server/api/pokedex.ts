@@ -37,11 +37,6 @@ export default defineEventHandler(async (event) => {
       for(var value in sv["pokedex"][area]){
         pokedex = {}
         pokedex["no"] = sv["pokedex"][area][value]["no"]
-        // console.log(value)
-        // console.log(sv["pokedex"][area][value]["no"])
-        // console.log(sv["pokedex"][area][value]["globalNo"])
-        // console.log(Number(sv["pokedex"][area][value]["globalNo"]))
-        // console.log(global["pokedex"][Number(sv["pokedex"][area][value]["globalNo"])])
         pokedex["name"] = global["pokedex"][Number(sv["pokedex"][area][value]["globalNo"])-1]["name"]["jpn"]
         pokelist.push(pokedex)
       }
@@ -49,14 +44,7 @@ export default defineEventHandler(async (event) => {
       result = pokelist
       break
     case "details":
-      // var no = sv["pokedex"][area][id-1]["no"]
       var globalNo = sv["pokedex"][area][id-1]["globalNo"]
-      // var name = global["pokedex"][Number(globalNo)-1]["name"]["jpn"]
-      // var height = global["pokedex"][Number(globalNo)-1]["height"]
-      // var weight = global["pokedex"][Number(globalNo)-1]["weight"]
-      // var classi = global["pokedex"][Number(globalNo)-1]["classification"]
-      // var type1 = sv["pokedex"][area][id-1]["status"][0]["type1"]
-      // var type2 = sv["pokedex"][area][id-1]["status"][0]["type2"]
       pokedex["no"] = sv["pokedex"][area][id-1]["no"]
       pokedex["globalNo"] = sv["pokedex"][area][id-1]["globalNo"]
       pokedex["name"] = global["pokedex"][Number(globalNo)-1]["name"]["jpn"]
@@ -68,6 +56,12 @@ export default defineEventHandler(async (event) => {
       pokedex["ability1"] = sv["pokedex"][area][id-1]["status"][0]["ability1"]
       pokedex["ability2"] = sv["pokedex"][area][id-1]["status"][0]["ability2"]
       pokedex["dream_ability"] = sv["pokedex"][area][id-1]["status"][0]["dream_ability"]
+      pokedex["hp"] = sv["pokedex"][area][id-1]["status"][0]["hp"]
+      pokedex["attack"] = sv["pokedex"][area][id-1]["status"][0]["attack"]
+      pokedex["defense"] = sv["pokedex"][area][id-1]["status"][0]["defense"]
+      pokedex["special_attack"] = sv["pokedex"][area][id-1]["status"][0]["special_attack"]
+      pokedex["special_defense"] = sv["pokedex"][area][id-1]["status"][0]["special_defense"]
+      pokedex["speed"] = sv["pokedex"][area][id-1]["status"][0]["speed"]
 
       result = pokedex
       break
