@@ -35,7 +35,7 @@
   }
 </script>
 <template>
-  <v-card>
+  <!-- <v-card> -->
     <v-layout>
       <!-- <v-system-bar color="deep-purple darken-3"></v-system-bar> -->
 
@@ -68,11 +68,11 @@
       </v-navigation-drawer>
 
       <v-main style="height: 100%;">
-        <v-card-text>
+        <!-- <v-card-text> -->
           <!-- The navigation drawer will appear from the bottom on smaller size screens. -->
           <slot></slot>
-        </v-card-text>
+        <!-- </v-card-text> -->
       </v-main>
     </v-layout>
-  </v-card>
+  <!-- </v-card> -->
 </template>
