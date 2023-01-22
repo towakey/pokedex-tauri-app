@@ -27,17 +27,18 @@ const pokedate = pokedex.value.pokedex
     <v-card-title class="type2"
      v-else
     >
-      {{ pokedate.type1 }}  {{ pokedate.type2 }}
+      <span>{{ pokedate.type1 }}</span><span>{{ pokedate.type2 }}</span>
     </v-card-title>
   </v-card>
   <v-card>
     <v-card-text>
-      <p>HP:{{ pokedate.hp }}</p>
+      <!-- <p>HP:{{ pokedate.hp }}</p>
       <p>こうげき:{{ pokedate.attack }}</p>
       <p>ぼうぎょ:{{ pokedate.defense }}</p>
       <p>とくこう:{{ pokedate.special_attack }}</p>
       <p>とくぼう:{{ pokedate.special_defense }}</p>
-      <p>すばやさ:{{ pokedate.speed }}</p>
+      <p>すばやさ:{{ pokedate.speed }}</p> -->
+      <StatusChart :statusData="pokedate" />
     </v-card-text>
   </v-card>
   <v-card>
@@ -56,5 +57,13 @@ const pokedate = pokedex.value.pokedex
 .type2{
   text-align: center;
   background: linear-gradient(to right, green 0%, green 50%, indigo 50%,  indigo 100%);
+}
+.type_Grass{
+  text-align: center;
+  background: green;
+}
+.type_Dark{
+  text-align: center;
+  background: indigo;
 }
 </style>
