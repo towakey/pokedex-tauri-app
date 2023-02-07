@@ -1,36 +1,23 @@
 <template>
   <v-container class="bg-surface-variant">
     <v-row>
-      <v-col>
+      <!-- <v-col>
         <NuxtLink
-          :to="{path: '/pokedex'}"
+          :to="{path: '/pokedex/global'}"
         >
           <v-card>
             <v-card-title
               style="text-align:center"
-            >ポケモン図鑑</v-card-title>
+            >全国図鑑</v-card-title>
           </v-card>
         </NuxtLink>
-      </v-col>
+      </v-col> -->
       <v-col>
-        <NuxtLink
-          :to="{path: '/webapp'}"
-        >
+        <a href="/pokedex/paldea">
           <v-card>
             <v-card-title
               style="text-align:center"
-            >WEBアプリ</v-card-title>
-          </v-card>
-        </NuxtLink>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <a href="/blog">
-          <v-card>
-            <v-card-title
-              style="text-align:center"
-            >ブログ</v-card-title>
+            >パルデア図鑑</v-card-title>
           </v-card>
         </a>
       </v-col>
@@ -49,3 +36,10 @@
     </v-row> -->
   </v-container>
 </template>
+<script>
+export default defineComponent({
+  setup() {
+    
+  },
+})
+</script>

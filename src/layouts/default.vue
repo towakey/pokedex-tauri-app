@@ -13,8 +13,12 @@
           value: '',
         },
         {
-          title: 'パルデア図鑑',
-          value: 'Paldea',
+          title: 'ポケモン図鑑',
+          value: 'pokedex',
+        },
+        {
+          title: 'ブログ',
+          value: 'blog',
         },
         // {
         //   title: '全国図鑑',
@@ -44,7 +48,13 @@
         prominent
       >
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
+        <v-toolbar-title>
+          <NuxtLink
+            :to="{path: `/`}"
+          >
+            {{ title }}
+          </NuxtLink>
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <!-- <v-btn variant="text" icon="mdi-magnify"></v-btn> -->
         <!-- <v-btn variant="text" icon="mdi-filter"></v-btn> -->

@@ -5,17 +5,55 @@ const route = useRoute();
 // })
 // const { id } = route.query;
 const { id } = route.params;
-const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details' } })
-const pokedate = pokedex.value.pokedex
+// const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details' } })
+
+let { data: readPokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details' } })
+
+let prev, next;
+let prevData,nextData;
+if (id == "1") {
+  prev = ""
+} else {
+  prev = await useFetch('/api/pokedex', { query: { id: String(Number(id)-1), area: 'paldea', type: 'details' } })
+  console.log(prev.data.value)
+  // prevData = prev.value.pokedex
+}
+if (id == "400") {
+  next = ""
+} else {
+  next = await useFetch('/api/pokedex', { query: { id: String(Number(id)+1), area: 'paldea', type: 'details' } })
+  // nextData = next.value.pokedex
+}
+
+const pokedate = readPokedex.value.pokedex
 </script>
 <template>
   <!-- <h1>details.vue[{{ pokedex }}]</h1> -->
   <v-card>
-    <v-card-title>No.{{ pokedate.no }} {{ pokedate.name }}</v-card-title>
+    <v-card-actions>
+      <v-btn
+        variant = "tonal"
+        v-if='prev != ""'
+        :to='{path: `/pokedex/paldea/${prev.data.value.pokedex.no}`}'
+      >{{ prev.data.value.pokedex.name }}</v-btn>
+      <v-spacer />
+      <v-btn
+        variant = "tonal"
+        :to='{path: `/pokedex/paldea`}'
+      >図鑑TOP</v-btn>
+      <v-spacer />
+      <v-btn
+        variant = "tonal"
+        v-if='next != ""'
+        :to='{path: `/pokedex/paldea/${next.data.value.pokedex.no}`}'
+      >{{ next.data.value.pokedex.name }}</v-btn>
+    </v-card-actions>
+  </v-card>
+  <v-card>
+    <v-card-title><h1>No.{{ pokedate.no }} {{ pokedate.name }}</h1></v-card-title>
     <v-card-subtitle>{{ pokedate.classification }}</v-card-subtitle>
     <v-card-text>
-      <p><v-icon>mdi-human-male-height</v-icon>たかさ:{{ pokedate.height }}m</p>
-      <p><v-icon>mdi-scale</v-icon>おもさ:{{ pokedate.weight }}m</p>
+      <h2><!--<v-icon>mdi-human-male-height</v-icon>-->たかさ:{{ pokedate.height }}m <!--<v-icon>mdi-scale</v-icon>-->おもさ:{{ pokedate.weight }}m</h2>
     </v-card-text>
   </v-card>
   <v-card>
