@@ -10,7 +10,8 @@ const pokedate = pokedex.value.pokedex
     <!-- <v-list lines="one"> -->
       <NuxtLink
         v-for="list in pokedate" :key="list.id"
-        :to="{path: `/pokedex/paldea/${list.no}`}" no-prefetch>
+        :to="{path: `/pokedex/paldea/${list.no}`}"
+      >
         <v-card v-if="list.no!=''">
           <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
         </v-card>

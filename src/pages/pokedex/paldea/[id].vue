@@ -1,41 +1,77 @@
 <script setup lang="ts">
-const route = useRoute();
+const route = useRoute()
 // definePageMeta({
 //   title: route,
 // })
-// const { id } = route.query;
+let prev, next, loadPokedex,pokedate;
+
 const { id } = route.params;
 // const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details' } })
 
-let { data: readPokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details' } })
+// let { data: readPokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
+// pokedate = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
+// loadPokedex = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
+loadPokedex = await useFetch('/api/pokedex?id='+id+'&area=paldea&type=details', { refresh: true })
+// loadPokedex = await $fetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
+pokedate = loadPokedex.data.value.pokedex
+// pokedate = loadPokedex.pokedex
 
-let prev, next;
-let prevData,nextData;
-if (id == "1") {
-  prev = ""
-} else {
-  prev = await useFetch('/api/pokedex', { query: { id: String(Number(id)-1), area: 'paldea', type: 'details' } })
-  console.log(prev.data.value)
-  // prevData = prev.value.pokedex
-}
-if (id == "400") {
-  next = ""
-} else {
-  next = await useFetch('/api/pokedex', { query: { id: String(Number(id)+1), area: 'paldea', type: 'details' } })
-  // nextData = next.value.pokedex
-}
+// if (id == "1") {
+//   prev = ""
+// } else {
+//   // prev = await useFetch('/api/pokedex', { query: { id: String(Number(id)-1), area: 'paldea', type: 'details' } })
+//   // prev = await useFetch('/api/pokedex', { query: { id: String(Number(id)-1), area: 'paldea', type: 'details' } })
+//   prev = await useFetch('/api/pokedex?id='+String(Number(id)-1)+'&area=paldea&type=details', { refresh: true })
+// }
+// if (id == "400") {
+//   next = ""
+// } else {
+//   // next = await useFetch('/api/pokedex', { query: { id: String(Number(id)+1), area: 'paldea', type: 'details' } })
+//   next = await useFetch('/api/pokedex?id='+String(Number(id)+1)+'&area=paldea&type=details', { refresh: true })
+// }
 
-const pokedate = readPokedex.value.pokedex
+
+onMounted(async () => {
+  // pokedate = await $fetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
+  console.log("onMounted reload")
+  // loadPokedex = await $fetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
+  // pokedate = loadPokedex.pokedex
+  // console.log(pokedate)
+})
+
+console.log(route.path)
+// watch(route, () => location.reload())
+
+// useHead({
+//   meta: [
+//     {
+//       'http-equiv': 'pragma',
+//       content: 'no-cache'
+//     },
+//     {
+//       'http-equiv': 'cache-control',
+//       content: 'no-cache'
+//     },
+//     {
+//       'http-equiv': 'expires',
+//       content: '0'
+//     }
+//   ]
+// })
+
 </script>
 <template>
-  <!-- <h1>details.vue[{{ pokedex }}]</h1> -->
+  <div>
+    <div>
+  <!-- <h1>[{{ prev }}]</h1> -->
   <v-card>
     <v-card-actions>
       <v-btn
         variant = "tonal"
-        v-if='prev != ""'
-        :to='{path: `/pokedex/paldea/${prev.data.value.pokedex.no}`}'
-      >{{ prev.data.value.pokedex.name }}</v-btn>
+        v-if='pokedate[0] != ""'
+        :to='{path: `/pokedex/paldea/${pokedate[0].no}`}'
+        no-prefetch
+      >{{ pokedate[0].name }}</v-btn>
       <v-spacer />
       <v-btn
         variant = "tonal"
@@ -44,56 +80,57 @@ const pokedate = readPokedex.value.pokedex
       <v-spacer />
       <v-btn
         variant = "tonal"
-        v-if='next != ""'
-        :to='{path: `/pokedex/paldea/${next.data.value.pokedex.no}`}'
-      >{{ next.data.value.pokedex.name }}</v-btn>
+        v-if='pokedate[2] != ""'
+        :to='{path: `/pokedex/paldea/${pokedate[2].no}`}'
+        no-prefetch
+      >{{ pokedate[2].name }}</v-btn>
     </v-card-actions>
   </v-card>
   <v-card>
-    <v-card-title><h1>No.{{ pokedate.no }} {{ pokedate.name }}</h1></v-card-title>
-    <v-card-subtitle>{{ pokedate.classification }}</v-card-subtitle>
+    <v-card-title><h1>No.{{ pokedate[1].no }} {{ pokedate[1].name }}</h1></v-card-title>
+    <v-card-subtitle>{{ pokedate[1].classification }}</v-card-subtitle>
     <v-card-text>
-      <h2><!--<v-icon>mdi-human-male-height</v-icon>-->たかさ:{{ pokedate.height }}m <!--<v-icon>mdi-scale</v-icon>-->おもさ:{{ pokedate.weight }}m</h2>
+      <h2><!--<v-icon>mdi-human-male-height</v-icon>-->たかさ:{{ pokedate[1].height }}m <!--<v-icon>mdi-scale</v-icon>-->おもさ:{{ pokedate[1].weight }}m</h2>
     </v-card-text>
   </v-card>
   <v-card>
     <v-card-title style="display: flex;">
-      <div style="" v-if='pokedate.type1 === "ノーマル"' class="type_Normal">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "ほのお"' class="type_Fire">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "みず"' class="type_Water">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "でんき"' class="type_Electric">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "くさ"' class="type_Grass">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "こおり"' class="type_Ice">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "かくとう"' class="type_Fighting">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "どく"' class="type_Poison">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "じめん"' class="type_Ground">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "ひこう"' class="type_Flying">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "エスパー"' class="type_Psychic">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "むし"' class="type_Bug">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "いわ"' class="type_Rock">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "ゴースト"' class="type_Ghost">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "ドラゴン"' class="type_Dragon">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "あく"' class="type_Dark">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "はがね"' class="type_Steel">{{ pokedate.type1 }}</div>
-      <div style="" v-else-if='pokedate.type1 === "フェアリー"' class="type_Fairy">{{ pokedate.type1 }}</div>
-      <div style="" v-if='pokedate.type2 !== "" && pokedate.type2 === "ノーマル"' class="type_Normal">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "ほのお"' class="type_Fire">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "みず"' class="type_Water">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "でんき"' class="type_Electric">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "くさ"' class="type_Grass">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "こおり"' class="type_Ice">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "かくとう"' class="type_Fighting">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "どく"' class="type_Poison">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "じめん"' class="type_Ground">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "ひこう"' class="type_Flying">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "エスパー"' class="type_Psychic">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "むし"' class="type_Bug">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "いわ"' class="type_Rock">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "ゴースト"' class="type_Ghost">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "ドラゴン"' class="type_Dragon">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "あく"' class="type_Dark">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "はがね"' class="type_Steel">{{ pokedate.type2 }}</div>
-      <div style="" v-else-if='pokedate.type2 !== "" && pokedate.type2 === "フェアリー"' class="type_Fairy">{{ pokedate.type2 }}</div>
+      <div style="" v-if='pokedate[1].type1 === "ノーマル"' class="type_Normal">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "ほのお"' class="type_Fire">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "みず"' class="type_Water">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "でんき"' class="type_Electric">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "くさ"' class="type_Grass">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "こおり"' class="type_Ice">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "かくとう"' class="type_Fighting">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "どく"' class="type_Poison">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "じめん"' class="type_Ground">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "ひこう"' class="type_Flying">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "エスパー"' class="type_Psychic">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "むし"' class="type_Bug">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "いわ"' class="type_Rock">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "ゴースト"' class="type_Ghost">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "ドラゴン"' class="type_Dragon">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "あく"' class="type_Dark">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "はがね"' class="type_Steel">{{ pokedate[1].type1 }}</div>
+      <div style="" v-else-if='pokedate[1].type1 === "フェアリー"' class="type_Fairy">{{ pokedate[1].type1 }}</div>
+      <div style="" v-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "ノーマル"' class="type_Normal">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "ほのお"' class="type_Fire">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "みず"' class="type_Water">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "でんき"' class="type_Electric">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "くさ"' class="type_Grass">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "こおり"' class="type_Ice">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "かくとう"' class="type_Fighting">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "どく"' class="type_Poison">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "じめん"' class="type_Ground">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "ひこう"' class="type_Flying">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "エスパー"' class="type_Psychic">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "むし"' class="type_Bug">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "いわ"' class="type_Rock">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "ゴースト"' class="type_Ghost">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "ドラゴン"' class="type_Dragon">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "あく"' class="type_Dark">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "はがね"' class="type_Steel">{{ pokedate[1].type2 }}</div>
+      <div style="" v-else-if='pokedate[1].type2 !== "" && pokedate[1].type2 === "フェアリー"' class="type_Fairy">{{ pokedate[1].type2 }}</div>
     </v-card-title>
   </v-card>
   <v-card>
@@ -104,18 +141,20 @@ const pokedate = readPokedex.value.pokedex
       <p>とくこう:{{ pokedate.special_attack }}</p>
       <p>とくぼう:{{ pokedate.special_defense }}</p>
       <p>すばやさ:{{ pokedate.speed }}</p> -->
-      <StatusChart :statusData="pokedate" />
+      <StatusChart :statusData="pokedate[1]" />
     </v-card-text>
   </v-card>
   <v-card>
-    <v-card-title>とくせい1 : {{ pokedate.ability1 }}</v-card-title>
+    <v-card-title>とくせい1 : {{ pokedate[1].ability1 }}</v-card-title>
   </v-card>
   <v-card>
-    <v-card-title v-if='pokedate.ability2 !== ""'>とくせい2 : {{ pokedate.ability2 }}</v-card-title>
+    <v-card-title v-if='pokedate[1].ability2 !== ""'>とくせい2 : {{ pokedate[1].ability2 }}</v-card-title>
   </v-card>
   <v-card>
-    <v-card-title v-if='pokedate.dream_ability !== ""'>かくれとくせい : {{ pokedate.dream_ability }}</v-card-title>
+    <v-card-title v-if='pokedate[1].dream_ability !== ""'>かくれとくせい : {{ pokedate[1].dream_ability }}</v-card-title>
   </v-card>
+</div>
+</div>
 </template>
 <style>
 .type1{
