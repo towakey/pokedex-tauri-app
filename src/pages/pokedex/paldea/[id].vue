@@ -6,58 +6,8 @@ const route = useRoute()
 let prev, next, loadPokedex,pokedate;
 
 const { id } = route.params;
-// const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details' } })
-
-// let { data: readPokedex} = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
-// pokedate = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
-// loadPokedex = await useFetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
 loadPokedex = await useFetch('/api/pokedex?id='+id+'&area=paldea&type=details', { refresh: true })
-// loadPokedex = await $fetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
 pokedate = loadPokedex.data.value.pokedex
-// pokedate = loadPokedex.pokedex
-
-// if (id == "1") {
-//   prev = ""
-// } else {
-//   // prev = await useFetch('/api/pokedex', { query: { id: String(Number(id)-1), area: 'paldea', type: 'details' } })
-//   // prev = await useFetch('/api/pokedex', { query: { id: String(Number(id)-1), area: 'paldea', type: 'details' } })
-//   prev = await useFetch('/api/pokedex?id='+String(Number(id)-1)+'&area=paldea&type=details', { refresh: true })
-// }
-// if (id == "400") {
-//   next = ""
-// } else {
-//   // next = await useFetch('/api/pokedex', { query: { id: String(Number(id)+1), area: 'paldea', type: 'details' } })
-//   next = await useFetch('/api/pokedex?id='+String(Number(id)+1)+'&area=paldea&type=details', { refresh: true })
-// }
-
-
-onMounted(async () => {
-  // pokedate = await $fetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
-  console.log("onMounted reload")
-  // loadPokedex = await $fetch('/api/pokedex', { query: { id: id, area: 'paldea', type: 'details', key: route.params } })
-  // pokedate = loadPokedex.pokedex
-  // console.log(pokedate)
-})
-
-console.log(route.path)
-// watch(route, () => location.reload())
-
-// useHead({
-//   meta: [
-//     {
-//       'http-equiv': 'pragma',
-//       content: 'no-cache'
-//     },
-//     {
-//       'http-equiv': 'cache-control',
-//       content: 'no-cache'
-//     },
-//     {
-//       'http-equiv': 'expires',
-//       content: '0'
-//     }
-//   ]
-// })
 
 </script>
 <template>
