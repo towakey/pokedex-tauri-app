@@ -22,6 +22,7 @@ export default defineEventHandler(async (event) => {
       area = "ガラル図鑑"
       areaPokedex_ = await import('~/assets/pokedex/pokedex/Sword_Shield/Sword_Shield.json')
       areaPokedex = areaPokedex_.default
+      indexMax = 400
       break
     case "paldea":
       area = "パルデア図鑑"
@@ -177,7 +178,6 @@ export default defineEventHandler(async (event) => {
         break
     }
   }
-  console.log(result)
   return {
     "result": query,
     "pokedex": result
