@@ -2,7 +2,8 @@
 // definePageMeta({
 //   title: "パルデア図鑑",
 // })
-const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: 'paldea', type: 'index' } })
+const pokedexArea = "paldea"
+const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: pokedexArea, type: 'index' } })
 const pokedate = pokedex.value.pokedex
 </script>
 <template>
@@ -10,7 +11,7 @@ const pokedate = pokedex.value.pokedex
     <!-- <v-list lines="one"> -->
       <NuxtLink
         v-for="list in pokedate" :key="list.id"
-        :to="{path: `/pokedex/paldea/${list.no}`}"
+        :to="{path: `/pokedex/${pokedexArea}/${list.no}`}"
       >
         <v-card v-if="list.no!=''">
           <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
