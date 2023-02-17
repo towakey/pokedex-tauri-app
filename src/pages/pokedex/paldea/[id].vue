@@ -14,28 +14,7 @@ pokedate = loadPokedex.data.value.pokedex
 </script>
 <template>
   <!-- <h1>[{{ prev }}]</h1> -->
-  <v-card>
-    <v-card-actions>
-      <v-btn
-        variant = "tonal"
-        v-if='pokedate[0] != ""'
-        :to='{path: `/pokedex/${pokedexArea}/${pokedate[0].no}`}'
-        no-prefetch
-      >{{ pokedate[0].name }}</v-btn>
-      <v-spacer />
-      <v-btn
-        variant = "tonal"
-        :to='{path: `/pokedex/${pokedexArea}`}'
-      >{{ pokedexName }}TOP</v-btn>
-      <v-spacer />
-      <v-btn
-        variant = "tonal"
-        v-if='pokedate[2] != ""'
-        :to='{path: `/pokedex/${pokedexArea}/${pokedate[2].no}`}'
-        no-prefetch
-      >{{ pokedate[2].name }}</v-btn>
-    </v-card-actions>
-  </v-card>
+  <LinkView :pokedexArea="pokedexArea" :pokedexName="pokedexName" :pokedate="pokedate" />
   <v-card>
     <v-card-title><h1>No.{{ pokedate[1].no }} {{ pokedate[1].name }}</h1></v-card-title>
     <v-card-subtitle>{{ pokedate[1].classification }}</v-card-subtitle>
