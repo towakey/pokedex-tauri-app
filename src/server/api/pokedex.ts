@@ -1,34 +1,129 @@
+import Config from 'chart.js/dist/core/core.config'
+
 export default defineEventHandler(async (event) => {
   const global_: any = await import('~/assets/pokedex/pokedex/pokedex.json')
   const global: any[] = global_.default
 
   const query = getQuery(event)
-  const id: number = Number(query.id) || 1
+  const id: number = Number(query.id)
   const area_type: string = String(query.area)
   const index_type: string = String(query.type)
-
-  // var area = "パルデア図鑑"
 
   var areaPokedex_: any
   var areaPokedex: any[]
   
   var area: string
+  var indexMin: Number
   var indexMax: Number
+  var offset: Number      // イッシュ図鑑ではビクティニが図鑑No.0の為の対応
   switch (area_type){
     case "global":
       area = "global"
+      indexMax = 1008
+      break
+    case "kanto":
+        area = "カントー図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Red_Green_Blue_Yellow/Red_Green_Blue_Yellow.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 151
+        offset = 0
+        break
+    case "johto":
+        area = "ジョウト図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Gold_Silver_Crystal/Gold_Silver_Crystal.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 251
+        offset = 0
+        break
+    case "hoenn":
+        area = "ホウエン図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Ruby_Sapphire_Emerald/Ruby_Sapphire_Emerald.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 202
+        offset = 0
+        break
+    case "sinnoh":
+        area = "シンオウ図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Diamond_Pearl_Platinum/Diamond_Pearl_Platinum.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 210
+        offset = 0
+        break
+    case "unova_bw":
+        area = "イッシュ図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Black_White/Black_White.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 155
+        offset = 1
+        break
+    case "unova_b2w2":
+        area = "イッシュ図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Black2_White2/Black2_White2.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 300
+        offset = 1
+        break
+    case "central_kalos":
+        area = "セントラルカロス図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/X_Y/X_Y.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 151
+        offset = 0
+        break
+    case "coast_kalos":
+      area = "コーストカロス図鑑"
+      areaPokedex_ = await import('~/assets/pokedex/pokedex/X_Y/X_Y.json')
+      areaPokedex = areaPokedex_.default
+      indexMin = -1
+      indexMax = 153
+      offset = 0
+      break
+    case "mountain_kalos":
+      area = "マウンテンカロス図鑑"
+      areaPokedex_ = await import('~/assets/pokedex/pokedex/X_Y/X_Y.json')
+      areaPokedex = areaPokedex_.default
+      indexMin = -1
+      indexMax = 151
+      offset = 0
+      break
+    case "alola_sm":
+      area = "アローラ図鑑"
+      areaPokedex_ = await import('~/assets/pokedex/pokedex/Sun_Moon/Sun_Moon.json')
+      areaPokedex = areaPokedex_.default
+      indexMin = -1
+      indexMax = 302
+      offset = 0
+      break
+    case "alola_usum":
+      area = "アローラ図鑑"
+      areaPokedex_ = await import('~/assets/pokedex/pokedex/UltraSun_UltraMoon/UltraSun_UltraMoon.json')
+      areaPokedex = areaPokedex_.default
+      indexMin = -1
+      indexMax = 403
+      offset = 0
       break
     case "galar":
       area = "ガラル図鑑"
       areaPokedex_ = await import('~/assets/pokedex/pokedex/Sword_Shield/Sword_Shield.json')
       areaPokedex = areaPokedex_.default
+      indexMin = -1
       indexMax = 400
+      offset = 0
       break
     case "paldea":
       area = "パルデア図鑑"
       areaPokedex_ = await import('~/assets/pokedex/pokedex/Scarlet_Violet/Scarlet_Violet.json')
       areaPokedex = areaPokedex_.default
+      indexMin = -1
       indexMax = 400
+      offset = 0
       break
     default:
       area = "global"
@@ -58,28 +153,46 @@ export default defineEventHandler(async (event) => {
 
         result = pokelist
         break
-      // case "details":
-      //   var globalNo = areaPokedex["pokedex"][area][id-1]["globalNo"]
-      //   pokedex["no"] = areaPokedex["pokedex"][area][id-1]["no"]
-      //   pokedex["globalNo"] = areaPokedex["pokedex"][area][id-1]["globalNo"]
-      //   pokedex["name"] = global["pokedex"][Number(globalNo)-1]["name"]["jpn"]
-      //   pokedex["height"] = global["pokedex"][Number(globalNo)-1]["height"]
-      //   pokedex["weight"] = global["pokedex"][Number(globalNo)-1]["weight"]
-      //   pokedex["classification"] = global["pokedex"][Number(globalNo)-1]["classification"]
-      //   pokedex["type1"] = areaPokedex["pokedex"][area][id-1]["status"][0]["type1"]
-      //   pokedex["type2"] = areaPokedex["pokedex"][area][id-1]["status"][0]["type2"]
-      //   pokedex["ability1"] = areaPokedex["pokedex"][area][id-1]["status"][0]["ability1"]
-      //   pokedex["ability2"] = areaPokedex["pokedex"][area][id-1]["status"][0]["ability2"]
-      //   pokedex["dream_ability"] = areaPokedex["pokedex"][area][id-1]["status"][0]["dream_ability"]
-      //   pokedex["hp"] = areaPokedex["pokedex"][area][id-1]["status"][0]["hp"]
-      //   pokedex["attack"] = areaPokedex["pokedex"][area][id-1]["status"][0]["attack"]
-      //   pokedex["defense"] = areaPokedex["pokedex"][area][id-1]["status"][0]["defense"]
-      //   pokedex["special_attack"] = areaPokedex["pokedex"][area][id-1]["status"][0]["special_attack"]
-      //   pokedex["special_defense"] = areaPokedex["pokedex"][area][id-1]["status"][0]["special_defense"]
-      //   pokedex["speed"] = areaPokedex["pokedex"][area][id-1]["status"][0]["speed"]
+      case "details":
+        result = []
+        var localNo
 
-      //   result = pokedex
-      //   break
+        pokedex = {}
+        localNo = Number(id - 2)
+        if(localNo == -1){
+          result[0]=""
+        }else{
+          pokedex["no"] = String(id - 1)
+          pokedex["name"] = global["pokedex"][localNo]["name"]["jpn"]
+          pokedex["height"] = global["pokedex"][localNo]["height"]
+          pokedex["weight"] = global["pokedex"][localNo]["weight"]
+          pokedex["classification"] = global["pokedex"][localNo]["classification"]
+          result[0]=pokedex
+        }
+
+        pokedex = {}
+        localNo = Number(id - 1)
+
+        pokedex["no"] = String(id)
+        pokedex["name"] = global["pokedex"][localNo]["name"]["jpn"]
+        pokedex["height"] = global["pokedex"][localNo]["height"]
+        pokedex["weight"] = global["pokedex"][localNo]["weight"]
+        pokedex["classification"] = global["pokedex"][localNo]["classification"]
+        result[1]=pokedex
+
+        pokedex = {}
+        localNo = Number(id)
+        if(localNo >= indexMax){
+          result[2]=""
+        }else{
+          pokedex["no"] = String(id + 1)
+          pokedex["name"] = global["pokedex"][localNo]["name"]["jpn"]
+          pokedex["height"] = global["pokedex"][localNo]["height"]
+          pokedex["weight"] = global["pokedex"][localNo]["weight"]
+          pokedex["classification"] = global["pokedex"][localNo]["classification"]
+          result[2]=pokedex
+        }
+        break
     }
   } else {
     switch (index_type){
@@ -98,21 +211,19 @@ export default defineEventHandler(async (event) => {
         break
       case "details":
         result = []
-        var globalNo
         var localNo
-
+        
         pokedex = {}
-        localNo = Number(id - 2)
-        if(localNo == -1){
+        localNo = Number(id - 2) + Number(offset)
+        if(localNo == indexMin){
           result[0]=""
         }else{
-          globalNo = Number(areaPokedex["pokedex"][area][id - 2]["globalNo"] - 1)
-          pokedex["no"] = areaPokedex["pokedex"][area][localNo]["no"]
+          pokedex["no"] = String(id - 1)
           pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
-          pokedex["name"] = global["pokedex"][globalNo]["name"]["jpn"]
-          pokedex["height"] = global["pokedex"][globalNo]["height"]
-          pokedex["weight"] = global["pokedex"][globalNo]["weight"]
-          pokedex["classification"] = global["pokedex"][globalNo]["classification"]
+          pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
+          pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
+          pokedex["weight"] = global["pokedex"][pokedex["globalNo"] - 1]["weight"]
+          pokedex["classification"] = global["pokedex"][pokedex["globalNo"] - 1]["classification"]
           pokedex["type1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type1"]
           pokedex["type2"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type2"]
           pokedex["ability1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["ability1"]
@@ -128,15 +239,15 @@ export default defineEventHandler(async (event) => {
         }
 
         pokedex = {}
-        localNo = Number(id - 1)
-        globalNo = Number(areaPokedex["pokedex"][area][id - 1]["globalNo"] - 1)
-
-        pokedex["no"] = areaPokedex["pokedex"][area][localNo]["no"]
+        localNo = (Number(id) - 1) + Number(offset)
+        console.log(id)
+        console.log(localNo)
+        pokedex["no"] = String(id)
         pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
-        pokedex["name"] = global["pokedex"][globalNo]["name"]["jpn"]
-        pokedex["height"] = global["pokedex"][globalNo]["height"]
-        pokedex["weight"] = global["pokedex"][globalNo]["weight"]
-        pokedex["classification"] = global["pokedex"][globalNo]["classification"]
+        pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
+        pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
+        pokedex["weight"] = global["pokedex"][pokedex["globalNo"] - 1]["weight"]
+        pokedex["classification"] = global["pokedex"][pokedex["globalNo"] - 1]["classification"]
         pokedex["type1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type1"]
         pokedex["type2"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type2"]
         pokedex["ability1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["ability1"]
@@ -151,17 +262,16 @@ export default defineEventHandler(async (event) => {
         result[1]=pokedex
 
         pokedex = {}
-        localNo = Number(id)
+        localNo = Number(id) + Number(offset)
         if(localNo >= indexMax){
           result[2]=""
         }else{
-          globalNo = Number(areaPokedex["pokedex"][area][id]["globalNo"] - 1)
           pokedex["no"] = areaPokedex["pokedex"][area][localNo]["no"]
           pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
-          pokedex["name"] = global["pokedex"][globalNo]["name"]["jpn"]
-          pokedex["height"] = global["pokedex"][globalNo]["height"]
-          pokedex["weight"] = global["pokedex"][globalNo]["weight"]
-          pokedex["classification"] = global["pokedex"][globalNo]["classification"]
+          pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
+          pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
+          pokedex["weight"] = global["pokedex"][pokedex["globalNo"] - 1]["weight"]
+          pokedex["classification"] = global["pokedex"][pokedex["globalNo"] - 1]["classification"]
           pokedex["type1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type1"]
           pokedex["type2"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type2"]
           pokedex["ability1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["ability1"]

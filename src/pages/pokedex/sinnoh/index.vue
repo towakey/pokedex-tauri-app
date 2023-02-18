@@ -2,7 +2,7 @@
 // definePageMeta({
 //   title: "パルデア図鑑",
 // })
-const pokedexArea = "global"
+const pokedexArea = "sinnoh"
 const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: pokedexArea, type: 'index' } })
 const pokedate = pokedex.value.pokedex
 </script>

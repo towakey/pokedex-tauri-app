@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // definePageMeta({
-//   title: "パルデア図鑑",
+//   title: "ガラル図鑑",
 // })
-const pokedexArea = "global"
+const pokedexArea = "galar"
 const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: pokedexArea, type: 'index' } })
 const pokedate = pokedex.value.pokedex
 </script>
