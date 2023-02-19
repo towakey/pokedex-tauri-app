@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <Bar
-      id="my-chart-id"
-      :options="chartOptions"
-      :data="chartData"
-    />
-    <!-- <p>pokedate:{{ statusData }}</p> -->
-  </div>
+  <v-card>
+    <v-card-text>
+      <Bar
+        id="my-chart-id"
+        :options="chartOptions"
+        :data="chartData"
+      />
+      <!-- <p>pokedate:{{ statusData }}</p> -->
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
