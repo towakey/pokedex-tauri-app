@@ -3,6 +3,9 @@ const route = useRoute()
 // definePageMeta({
 //   title: route,
 // })
+const pokedexListCmd = ["kanto", "johto", "hoenn", "sinnoh", "unova_bw", "unova_b2w2", "central_kalos", "coast_kalos", "mountain_kalos", "alola_sm", "alola_usum", "galar", "paldea"]
+const pokedexListName = ["カントー図鑑", "ジョウト図鑑", "ホウエン図鑑", "シンオウ図鑑", "イッシュ図鑑(Black White)", "イッシュ図鑑(Black2 White2)", "セントラルカロス図鑑", "コーストカロス図鑑", "マウンテンカロス図鑑", "アローラ図鑑(Sun Moon)", "アローラ図鑑(UltraSun UltraMoon)", "ガラル図鑑", "パルデア図鑑"]
+const pokedexList = {}
 const pokedexArea = "global"
 const pokedexName = "全国図鑑"
 let prev, next, loadPokedex,pokedate;
@@ -10,6 +13,13 @@ let prev, next, loadPokedex,pokedate;
 const { id } = route.params;
 loadPokedex = await useFetch('/api/pokedex?id='+id+'&area='+pokedexArea+'&type=details', { refresh: true })
 pokedate = loadPokedex.data.value.pokedex
+
+var pokedexCheck
+for(var val in pokedexListCmd){
+  pokedexCheck = await useFetch('/api/pokedex?id='+id+'&area='+pokedexListCmd[val]+'&type=exists')
+  pokedexList[pokedexListCmd[val]] = {name: pokedexListName[val], exists: pokedexCheck.data.value.pokedex}
+  // console.log(pokedexList[pokedexListCmd[val]])
+}
 
 </script>
 <template>
@@ -22,19 +32,21 @@ pokedate = loadPokedex.data.value.pokedex
       <h2><!--<v-icon>mdi-human-male-height</v-icon>-->たかさ:{{ pokedate[1].height }}m <!--<v-icon>mdi-scale</v-icon>-->おもさ:{{ pokedate[1].weight }}m</h2>
     </v-card-text>
   </v-card>
-  <!-- <TypeView :type1="pokedate[1].type1" :type2="pokedate[1].type2" /> -->
-  <v-card>
-    <v-card-text>
-      <!-- <p>HP:{{ pokedate.hp }}</p>
-      <p>こうげき:{{ pokedate.attack }}</p>
-      <p>ぼうぎょ:{{ pokedate.defense }}</p>
-      <p>とくこう:{{ pokedate.special_attack }}</p>
-      <p>とくぼう:{{ pokedate.special_defense }}</p>
-      <p>すばやさ:{{ pokedate.speed }}</p> -->
-      <!-- <StatusChart :statusData="pokedate[1]" /> -->
-    </v-card-text>
-  </v-card>
-  <!-- <AbilityView :ability1="pokedate[1].ability1" :ability2="pokedate[1].ability2" :dream_ability="pokedate[1].dream_ability" /> -->
+  <template v-for="(val, key) in pokedexList" :key="key">
+    <NuxtLink
+      v-if="val.exists.check"
+      :to="{path: `/pokedex/${key}/${val.exists.localNo}`}"
+    >
+      <v-card>
+        <v-card-title>{{ val.name }}</v-card-title>
+      </v-card>
+    </NuxtLink>
+    <v-card
+      v-if="!val.exists.check"
+    >
+      <v-card-title>{{ val.name }}</v-card-title>
+    </v-card>
+  </template>
 </template>
 <style>
 </style>
