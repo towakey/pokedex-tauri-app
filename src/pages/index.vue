@@ -1,3 +1,8 @@
+<script setup lang="ts">
+definePageMeta({
+  title: "Pokedex Online",
+})
+</script>
 <template>
   <v-container class="bg-surface-variant">
     <v-row>

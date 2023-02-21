@@ -1,8 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  title: "全国図鑑",
+})
 const route = useRoute()
-// definePageMeta({
-//   title: route,
-// })
 const pokedexListCmd = ["kanto", "johto", "hoenn", "sinnoh", "unova_bw", "unova_b2w2", "central_kalos", "coast_kalos", "mountain_kalos", "alola_sm", "alola_usum", "galar", "paldea"]
 const pokedexListName = ["カントー図鑑", "ジョウト図鑑", "ホウエン図鑑", "シンオウ図鑑", "イッシュ図鑑(Black White)", "イッシュ図鑑(Black2 White2)", "セントラルカロス図鑑", "コーストカロス図鑑", "マウンテンカロス図鑑", "アローラ図鑑(Sun Moon)", "アローラ図鑑(UltraSun UltraMoon)", "ガラル図鑑", "パルデア図鑑"]
 const pokedexList = {}
@@ -43,6 +43,7 @@ for(var val in pokedexListCmd){
     </NuxtLink>
     <v-card
       v-if="!val.exists.check"
+      style="background-color:silver"
     >
       <v-card-title>{{ val.name }}</v-card-title>
     </v-card>

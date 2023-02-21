@@ -81,6 +81,7 @@
               width="768px"
               height="960px"
               class="responsive-img"
+              style="{width: 100%; height: auto;}"
             ></canvas>
           </v-card-text>
         </v-card>
@@ -92,6 +93,10 @@
 
 export default defineComponent({
   setup(){
+    definePageMeta({
+      title: "リーグカードジェネレーター",
+    })
+
     const canvas = ref()
     const context = ref()
 

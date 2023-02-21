@@ -1,9 +1,70 @@
-<!-- <script setup lang="ts">
-  const route = useRoute()
-  useHead({ title: route.meta.title as string })
-</script> -->
-<script>
+<script setup lang="ts">
+// const title: Ref<string> = useState('title', () => "Pokedex Online")
+// const pageTitle = ref('')
+var pageTitle = ref('')
+const route = useRoute()
+useHead({
+  title: route.meta.title as string,
+})
+pageTitle.value = route.meta.title
+var drawer: Ref<boolean> = useState('drawer', () => true)
+const items = [
+  {
+    title: 'TOP',
+    value: '',
+  },
+  {
+    title: 'ポケモン図鑑',
+    value: 'pokedex',
+  },
+  {
+    title: 'Webアプリ',
+    value: 'webapp',
+  },
+  {
+    title: 'ブログ',
+    value: 'blog',
+  },
+]
+// console.log(head)
+
+// onMounted(()=>{
+//   pageTitle = route.meta.title
+//   // console.log(head)
+// })
+
+const onTitleChanged = (newTitle: string) => {
+  console.log("onTitleChanged")
+  console.log(newTitle)
+  pageTitle.value = newTitle
+  console.log(pageTitle)
+}
+// watch(pageTitle, () => {
+//   pageTitle = route.meta.title
+//   console.log(pageTitle)
+// })
+
+watchEffect(() => {
+  route.meta.title && onTitleChanged(route.meta.title as string)
+})
+
+// computed(() => {
+//   pageTitle = route.meta.title
+// })
+</script>
+
+<!-- <script>
+// import { config } from 'process'
+
   export default {
+    setup(){
+      const route = useRoute()
+      useHead({
+        title: route.meta.title
+      })
+      title = route.meta.title
+      console.log("title:"+route.meta.title)
+    },
     data: () => ({
       drawer: false,
       group: null,
@@ -25,7 +86,7 @@
         //   value: 'bar',
         // },
       ],
-      title: "ポケモン図鑑"
+      // title: "ポケモン図鑑"
     }),
     watch: {
       group () {
@@ -35,9 +96,17 @@
     created () {
       // const route = useRoute()
       // this.title = route.meta.title
+    },
+    computed: {
+      // pageTitle() {
+      //   const route = useRoute()
+      //   console.log(route.meta)
+      //   const title = route.title
+      //   return title
+      // }
     }
   }
-</script>
+</script> -->
 <template>
   <!-- <v-card> -->
     <v-layout>
@@ -52,7 +121,7 @@
           <NuxtLink
             :to="{path: `/`}"
           >
-            {{ title }}
+            {{ pageTitle }}
           </NuxtLink>
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -70,7 +139,7 @@
           :to="{path: `/${item.value}`}"
         >
           <v-list nav>
-            <v-list-item prepend-icon="mdi-scale">
+            <v-list-item prepend-icon="mdi-magnify">
               {{ item.title }}
             </v-list-item>
           </v-list>

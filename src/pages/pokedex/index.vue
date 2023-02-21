@@ -1,3 +1,8 @@
+<script setup lang="ts">
+definePageMeta({
+  title: "ポケモン図鑑",
+})
+</script>
 <template>
   <v-container class="bg-surface-variant">
     <v-row>
@@ -197,10 +202,3 @@
     </v-row> -->
   </v-container>
 </template>
-<script>
-export default defineComponent({
-  setup() {
-    
-  },
-})
-</script>

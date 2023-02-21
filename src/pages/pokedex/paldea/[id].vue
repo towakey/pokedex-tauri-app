@@ -1,8 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  title: "パルデア図鑑",
+})
 const route = useRoute()
-// definePageMeta({
-//   title: route,
-// })
 const pokedexArea = "paldea"
 const pokedexName = "パルデア図鑑"
 let loadPokedex,pokedate;

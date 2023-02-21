@@ -1,8 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  title: "アローラ図鑑(Sun Moon)",
+})
 const route = useRoute()
-// definePageMeta({
-//   title: route,
-// })
 const pokedexArea = "alola_sm"
 const pokedexName = "アローラ図鑑"
 let prev, next, loadPokedex,pokedate;

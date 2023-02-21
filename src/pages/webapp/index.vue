@@ -1,3 +1,8 @@
+<script setup lang="ts">
+definePageMeta({
+  title: "Webアプリ",
+})
+</script>
 <template>
   <v-container class="bg-surface-variant">
     <v-row>
