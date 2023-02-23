@@ -32,6 +32,19 @@ definePageMeta({
       </v-col>
       <v-col>
         <NuxtLink
+          :to="{path: '/pokedex/hisui'}"
+        >
+          <v-card>
+            <v-card-title
+              style="text-align:center"
+            >ヒスイ図鑑</v-card-title>
+          </v-card>
+        </NuxtLink>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <NuxtLink
           :to="{path: '/pokedex/galar'}"
         >
           <v-card>

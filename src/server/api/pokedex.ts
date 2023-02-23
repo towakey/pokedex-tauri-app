@@ -117,6 +117,14 @@ export default defineEventHandler(async (event) => {
       indexMax = 400
       offset = 0
       break
+    case "hisui":
+      area = "ヒスイ図鑑"
+      areaPokedex_ = await import('~/assets/pokedex/pokedex/LegendsArceus/LegendsArceus.json')
+      areaPokedex = areaPokedex_.default
+      indexMin = -1
+      indexMax = 400
+      offset = 0
+      break
     case "paldea":
       area = "パルデア図鑑"
       areaPokedex_ = await import('~/assets/pokedex/pokedex/Scarlet_Violet/Scarlet_Violet.json')
