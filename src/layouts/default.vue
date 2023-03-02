@@ -1,12 +1,11 @@
 <script setup lang="ts">
 // const title: Ref<string> = useState('title', () => "Pokedex Online")
-// const pageTitle = ref('')
 var pageTitle = ref('')
+var title = ref('')
 const route = useRoute()
-useHead({
-  title: route.meta.title as string,
-})
+// console.log(route.meta.title)
 pageTitle.value = route.meta.title
+
 var drawer: Ref<boolean> = useState('drawer', () => true)
 const items = [
   {
@@ -26,87 +25,34 @@ const items = [
     value: 'blog',
   },
 ]
-// console.log(head)
 
 // onMounted(()=>{
-//   pageTitle = route.meta.title
-//   // console.log(head)
+// })
+// computed(() => {
 // })
 
 const onTitleChanged = (newTitle: string) => {
-  console.log("onTitleChanged")
-  console.log(newTitle)
   pageTitle.value = newTitle
-  console.log(pageTitle)
+  title.value = newTitle
 }
-// watch(pageTitle, () => {
-//   pageTitle = route.meta.title
-//   console.log(pageTitle)
-// })
 
 watchEffect(() => {
   route.meta.title && onTitleChanged(route.meta.title as string)
 })
+useHead({
+  // title: route.meta.title as string,
+  title: title,
+  // meta: [
+  //   {
+  //     hid: 'twitter:title',
+  //     name: 'twitter:title',
+  //     content: 'ヒスイ図鑑'
+  //   }
+  // ]
+})
 
-// computed(() => {
-//   pageTitle = route.meta.title
-// })
 </script>
 
-<!-- <script>
-// import { config } from 'process'
-
-  export default {
-    setup(){
-      const route = useRoute()
-      useHead({
-        title: route.meta.title
-      })
-      title = route.meta.title
-      console.log("title:"+route.meta.title)
-    },
-    data: () => ({
-      drawer: false,
-      group: null,
-      items: [
-      {
-          title: 'TOP',
-          value: '',
-        },
-        {
-          title: 'ポケモン図鑑',
-          value: 'pokedex',
-        },
-        {
-          title: 'ブログ',
-          value: 'blog',
-        },
-        // {
-        //   title: '全国図鑑',
-        //   value: 'bar',
-        // },
-      ],
-      // title: "ポケモン図鑑"
-    }),
-    watch: {
-      group () {
-        this.drawer = false
-      },
-    },
-    created () {
-      // const route = useRoute()
-      // this.title = route.meta.title
-    },
-    computed: {
-      // pageTitle() {
-      //   const route = useRoute()
-      //   console.log(route.meta)
-      //   const title = route.title
-      //   return title
-      // }
-    }
-  }
-</script> -->
 <template>
   <!-- <v-card> -->
     <v-layout>

@@ -122,7 +122,7 @@ export default defineEventHandler(async (event) => {
       areaPokedex_ = await import('~/assets/pokedex/pokedex/LegendsArceus/LegendsArceus.json')
       areaPokedex = areaPokedex_.default
       indexMin = -1
-      indexMax = 400
+      indexMax = 242
       offset = 0
       break
     case "paldea":
