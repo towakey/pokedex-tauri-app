@@ -1,0 +1,17 @@
+<script setup lang="ts">
+  const props = defineProps(["pokedexArea"])
+  const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: props.pokedexArea, type: 'index' } })
+  const pokedate = pokedex.value.pokedex
+</script>
+<template>
+  <v-container>
+    <NuxtLink
+      v-for="list in pokedate" :key="list.id"
+      :to="{path: `/pokedex/${pokedexArea}/${list.no}`}"
+    >
+      <v-card v-if="list.no!=''">
+        <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
+      </v-card>
+    </NuxtLink>
+  </v-container>  
+</template>
