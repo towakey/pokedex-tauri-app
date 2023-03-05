@@ -66,6 +66,7 @@ useHead({
         <v-toolbar-title>
           <NuxtLink
             :to="{path: `/`}"
+            class="title"
           >
             {{ pageTitle }}
           </NuxtLink>
@@ -83,6 +84,7 @@ useHead({
         <NuxtLink
           v-for="item in items" :key="items.title"
           :to="{path: `/${item.value}`}"
+          class="sideMenu"
         >
           <v-list nav>
             <v-list-item prepend-icon="mdi-magnify">
@@ -101,3 +103,12 @@ useHead({
     </v-layout>
   <!-- </v-card> -->
 </template>
+<style>
+.title{
+  text-decoration: none;
+  color: white;
+}
+.sideMenu{
+  text-decoration: none;
+}
+</style>
