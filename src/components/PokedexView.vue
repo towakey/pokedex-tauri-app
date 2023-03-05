@@ -8,10 +8,16 @@
     <NuxtLink
       v-for="list in pokedate" :key="list.id"
       :to="{path: `/pokedex/${pokedexArea}/${list.no}`}"
+      class="pokedexMenu"
     >
       <v-card v-if="list.no!=''">
         <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
       </v-card>
     </NuxtLink>
-  </v-container>  
+  </v-container>
 </template>
+<style>
+.pokedexMenu{
+  text-decoration: none;
+}
+</style>
