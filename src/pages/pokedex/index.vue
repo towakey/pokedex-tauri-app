@@ -2,6 +2,27 @@
 definePageMeta({
   title: "ポケモン図鑑",
 })
+const metaTitle = ref("ポケモン図鑑 一覧")
+useHead({
+  title: metaTitle,
+  meta: [
+  {
+      hid: 'og:title',
+      name: 'og:title',
+      content: metaTitle
+    },
+    {
+      hid: 'twitter:card',
+      name: 'twitter:card',
+      content: 'summary'
+    },
+    {
+      hid: 'twitter:title',
+      name: 'twitter:title',
+      content: metaTitle
+    }
+  ]
+})
 </script>
 <template>
   <v-container class="bg-surface-variant">
@@ -35,6 +56,28 @@ definePageMeta({
         >
           <v-card>
             <v-card-title>ヒスイ図鑑</v-card-title>
+          </v-card>
+        </NuxtLink>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <NuxtLink
+          :to="{path: '/pokedex/isle_of_armor'}"
+          class="pokedexLink"
+        >
+          <v-card>
+            <v-card-title>ヨロイ島図鑑</v-card-title>
+          </v-card>
+        </NuxtLink>
+      </v-col>
+      <v-col>
+        <NuxtLink
+          :to="{path: '/pokedex/crown_tundra'}"
+          class="pokedexLink"
+        >
+          <v-card>
+            <v-card-title>カンムリ雪原図鑑</v-card-title>
           </v-card>
         </NuxtLink>
       </v-col>
