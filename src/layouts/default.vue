@@ -6,7 +6,7 @@ const route = useRoute()
 // console.log(route.meta.title)
 pageTitle.value = route.meta.title
 
-var drawer: Ref<boolean> = useState('drawer', () => true)
+var drawer: Ref<boolean> = useState('drawer', () => false)
 const items = [
   {
     title: 'TOP',
