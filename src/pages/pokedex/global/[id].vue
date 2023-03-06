@@ -18,27 +18,19 @@ var pokedexCheck
 for(var val in pokedexListCmd){
   pokedexCheck = await useFetch('/api/pokedex?id='+id+'&area='+pokedexListCmd[val]+'&type=exists')
   pokedexList[pokedexListCmd[val]] = {name: pokedexListName[val], exists: pokedexCheck.data.value.pokedex}
-  // console.log(pokedexList[pokedexListCmd[val]])
 }
 
 </script>
 <template>
-  <!-- <h1>[{{ prev }}]</h1> -->
   <LinkView :pokedexArea="pokedexArea" :pokedexName="pokedexName" :pokedate="pokedate" />
-  <v-card>
-    <v-card-title><h1>No.{{ pokedate[1].no }} {{ pokedate[1].name }}</h1></v-card-title>
-    <v-card-subtitle>{{ pokedate[1].classification }}</v-card-subtitle>
-    <v-card-text>
-      <h2><!--<v-icon>mdi-human-male-height</v-icon>-->たかさ:{{ pokedate[1].height }}m <!--<v-icon>mdi-scale</v-icon>-->おもさ:{{ pokedate[1].weight }}m</h2>
-    </v-card-text>
-  </v-card>
+  <NameView :no="pokedate[1].no" :name="pokedate[1].name" :classification="pokedate[1].classification" :height="pokedate[1].height" :weight="pokedate[1].weight" />
   <template v-for="(val, key) in pokedexList" :key="key">
     <NuxtLink
       v-if="val.exists.check"
       :to="{path: `/pokedex/${key}/${val.exists.localNo}`}"
     >
       <v-card>
-        <v-card-title>{{ val.name }}</v-card-title>
+        <v-card-title>{{ val.name }} No.{{ val.exists.localNo }}</v-card-title>
       </v-card>
     </NuxtLink>
     <v-card
