@@ -40,6 +40,12 @@ export const pokedexId2Name = (type: string) => {
       case "galar":
       result = "ガラル図鑑"
       break
+      case "crown_tundra":
+      result = "カンムリ雪原図鑑"
+      break
+      case "isle_of_armor":
+      result = "ヨロイ島図鑑"
+      break
       case "hisui":
       result = "ヒスイ図鑑"
       break

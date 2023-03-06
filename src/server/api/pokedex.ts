@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
         areaPokedex_ = await import('~/assets/pokedex/pokedex/Black2_White2/Black2_White2.json')
         areaPokedex = areaPokedex_.default
         indexMin = -1
-        indexMax = 300
+        indexMax = 301
         offset = 1
         break
     case "central_kalos":
@@ -110,13 +110,29 @@ export default defineEventHandler(async (event) => {
       offset = 0
       break
     case "galar":
-      area = "ガラル図鑑"
+        area = "ガラル図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Sword_Shield/Sword_Shield.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 400
+        offset = 0
+        break
+    case "crown_tundra":
+      area = "カンムリ雪原図鑑"
       areaPokedex_ = await import('~/assets/pokedex/pokedex/Sword_Shield/Sword_Shield.json')
       areaPokedex = areaPokedex_.default
       indexMin = -1
-      indexMax = 400
+      indexMax = 210
       offset = 0
       break
+    case "isle_of_armor":
+        area = "ヨロイ島図鑑"
+        areaPokedex_ = await import('~/assets/pokedex/pokedex/Sword_Shield/Sword_Shield.json')
+        areaPokedex = areaPokedex_.default
+        indexMin = -1
+        indexMax = 211
+        offset = 0
+        break
     case "hisui":
       area = "ヒスイ図鑑"
       areaPokedex_ = await import('~/assets/pokedex/pokedex/LegendsArceus/LegendsArceus.json')
@@ -248,6 +264,7 @@ export default defineEventHandler(async (event) => {
         localNo = (Number(id) - 1) + Number(offset)
         pokedex["no"] = String(id)
         pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
+        console.log("globalNo:"+pokedex["globalNo"])
         pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
         pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
         pokedex["weight"] = global["pokedex"][pokedex["globalNo"] - 1]["weight"]
@@ -270,7 +287,8 @@ export default defineEventHandler(async (event) => {
         if(localNo >= indexMax){
           result[2]=""
         }else{
-          pokedex["no"] = areaPokedex["pokedex"][area][localNo]["no"]
+          // pokedex["no"] = areaPokedex["pokedex"][area][localNo]["no"]
+          pokedex["no"] = String(id + 1)
           pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
           pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
           pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
