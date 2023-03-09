@@ -7,49 +7,49 @@ export const pokedexId2Name = (type: string) => {
     case "kanto":
       result = "カントー図鑑"
       break
-      case "johto":
+    case "johto":
       result = "ジョウト図鑑"
       break
-      case "hoenn":
+    case "hoenn":
       result = "ホウエン図鑑"
       break
-      case "sinnoh":
+    case "sinnoh":
       result = "シンオウ図鑑"
       break
-      case "unova_bw":
+    case "unova_bw":
       result = "イッシュ図鑑(Black White)"
       break
-      case "unova_b2w2":
+    case "unova_b2w2":
       result = "イッシュ図鑑(Black2 White2)"
       break
-      case "central_kalos":
+    case "central_kalos":
       result = "セントラルカロス図鑑"
       break
-      case "coast_kalos":
+    case "coast_kalos":
       result = "コーストカロス図鑑"
       break
-      case "mountain_kalos":
+    case "mountain_kalos":
       result = "マウンテンカロス図鑑"
       break
-      case "alola_sm":
+    case "alola_sm":
       result = "アローラ図鑑(Sun Moon)"
       break
-      case "alola_usum":
+    case "alola_usum":
       result = "アローラ図鑑(UltraSun UltraMoon)"
       break
-      case "galar":
+    case "galar":
       result = "ガラル図鑑"
       break
-      case "crown_tundra":
-      result = "カンムリ雪原図鑑"
-      break
-      case "isle_of_armor":
+    case "isle_of_armor":
       result = "ヨロイ島図鑑"
       break
-      case "hisui":
+    case "crown_tundra":
+      result = "カンムリ雪原図鑑"
+      break
+    case "hisui":
       result = "ヒスイ図鑑"
       break
-      case "paldea":
+    case "paldea":
       result = "パルデア図鑑"
       break
   }

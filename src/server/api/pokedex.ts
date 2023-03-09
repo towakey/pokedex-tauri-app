@@ -165,7 +165,7 @@ export default defineEventHandler(async (event) => {
   if(area == "global"){
     switch (index_type){
       case "index":
-        console.log("global:index")
+        // console.log("global:index")
         for(var value in global["pokedex"]){
           pokedex = {}
           pokedex["no"] = global["pokedex"][value]["id"]
@@ -264,7 +264,7 @@ export default defineEventHandler(async (event) => {
         localNo = (Number(id) - 1) + Number(offset)
         pokedex["no"] = String(id)
         pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
-        console.log("globalNo:"+pokedex["globalNo"])
+        // console.log("globalNo:"+pokedex["globalNo"])
         pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
         pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
         pokedex["weight"] = global["pokedex"][pokedex["globalNo"] - 1]["weight"]
@@ -313,9 +313,9 @@ export default defineEventHandler(async (event) => {
         for(var value in areaPokedex["pokedex"][area]){
           // console.log(id)
           // console.log(areaPokedex["pokedex"][area][value]["globalNo"])
-          if(areaPokedex["pokedex"][area][value]["globalNo"] == id){
-            console.log(areaPokedex["pokedex"][area][value]["globalNo"])
-            result = {check: true, localNo: Number(value) + 1}
+          if(areaPokedex["pokedex"][area][value]["globalNo"] == id ){
+            // console.log(areaPokedex["pokedex"][area][value]["globalNo"])
+            result = {check: true, localNo: Number(value) + 1 - Number(offset)}
           }
         }
         break

@@ -1,6 +1,7 @@
 <script setup lang="ts">
   const props = defineProps(["pokedexArea"])
-  const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: props.pokedexArea, type: 'index' } })
+  // const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: props.pokedexArea, type: 'index' }, { refresh: true } })
+  const { data: pokedex} = await useFetch('/api/pokedex?id=1&area='+props.pokedexArea+'&type=index', { refresh: true })
   const pokedate = pokedex.value.pokedex
   const Id2Name = pokedexId2Name(props.pokedexArea)
   const metaTitle = ref(Id2Name)
@@ -25,7 +26,6 @@ useHead({
     }
   ]
 })
-
 </script>
 <template>
   <v-container>
@@ -34,14 +34,27 @@ useHead({
       :to="{path: `/pokedex/${pokedexArea}/${list.no}`}"
       class="pokedexMenu"
     >
-      <v-card v-if="list.no!=''">
+    <v-card v-if="list.no!='' && props.pokedexArea == 'global'">
+        <v-card-title>
+          <span class="pokemonName">No.{{ list.no }} {{ list.name }}</span><span class="gameVersion">{{ pokedexId2GameVersion(list.no) }}</span>
+        </v-card-title>
+      </v-card>
+      <v-card v-else>
         <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
       </v-card>
     </NuxtLink>
   </v-container>
+  <SnsView :siteTitle="metaTitle" />
 </template>
 <style>
 .pokedexMenu{
   text-decoration: none;
+}
+.pokemonName{
+}
+.gameVersion{
+  float: right;
+  color: darkgrey;
+  font-size: small;
 }
 </style>
