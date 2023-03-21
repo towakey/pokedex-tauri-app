@@ -155,6 +155,8 @@ export default defineEventHandler(async (event) => {
   }
 
   let pokedex:{[key: string]: string}
+  let detaile:{[key: string]: string}
+  let status
   pokedex = {}
 
   let pokelist: any
@@ -261,6 +263,7 @@ export default defineEventHandler(async (event) => {
         }
 
         pokedex = {}
+        status = []
         localNo = (Number(id) - 1) + Number(offset)
         pokedex["no"] = String(id)
         pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
@@ -280,6 +283,27 @@ export default defineEventHandler(async (event) => {
         pokedex["special_attack"] = areaPokedex["pokedex"][area][localNo]["status"][0]["special_attack"]
         pokedex["special_defense"] = areaPokedex["pokedex"][area][localNo]["status"][0]["special_defense"]
         pokedex["speed"] = areaPokedex["pokedex"][area][localNo]["status"][0]["speed"]
+
+        var i:Number
+        for(i=0;i<areaPokedex["pokedex"][area][localNo]["status"].length;i++){
+          detaile = {}
+          detaile["form"] = areaPokedex["pokedex"][area][localNo]["status"][i]["form"]
+          detaile["type1"] = areaPokedex["pokedex"][area][localNo]["status"][i]["type1"]
+          detaile["type2"] = areaPokedex["pokedex"][area][localNo]["status"][i]["type2"]
+          detaile["ability1"] = areaPokedex["pokedex"][area][localNo]["status"][i]["ability1"]
+          detaile["ability2"] = areaPokedex["pokedex"][area][localNo]["status"][i]["ability2"]
+          detaile["dream_ability"] = areaPokedex["pokedex"][area][localNo]["status"][i]["dream_ability"]
+          detaile["hp"] = areaPokedex["pokedex"][area][localNo]["status"][i]["hp"]
+          detaile["attack"] = areaPokedex["pokedex"][area][localNo]["status"][i]["attack"]
+          detaile["defense"] = areaPokedex["pokedex"][area][localNo]["status"][i]["defense"]
+          detaile["special_attack"] = areaPokedex["pokedex"][area][localNo]["status"][i]["special_attack"]
+          detaile["special_defense"] = areaPokedex["pokedex"][area][localNo]["status"][i]["special_defense"]
+          detaile["speed"] = areaPokedex["pokedex"][area][localNo]["status"][i]["speed"]
+
+          status.push(detaile)
+        }
+        pokedex["status"] = status
+
         result[1]=pokedex
 
         pokedex = {}
