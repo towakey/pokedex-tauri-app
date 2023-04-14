@@ -164,6 +164,8 @@ export default defineEventHandler(async (event) => {
 
   let result: any
 
+  let description:{[key: string]: string}
+
   if(area == "global"){
     switch (index_type){
       case "index":
@@ -285,6 +287,7 @@ export default defineEventHandler(async (event) => {
         pokedex["speed"] = areaPokedex["pokedex"][area][localNo]["status"][0]["speed"]
 
         var i:Number
+        var j:number
         for(i=0;i<areaPokedex["pokedex"][area][localNo]["status"].length;i++){
           detaile = {}
           detaile["form"] = areaPokedex["pokedex"][area][localNo]["status"][i]["form"]
@@ -299,6 +302,12 @@ export default defineEventHandler(async (event) => {
           detaile["special_attack"] = areaPokedex["pokedex"][area][localNo]["status"][i]["special_attack"]
           detaile["special_defense"] = areaPokedex["pokedex"][area][localNo]["status"][i]["special_defense"]
           detaile["speed"] = areaPokedex["pokedex"][area][localNo]["status"][i]["speed"]
+          detaile["description"] = areaPokedex["pokedex"][area][localNo]["status"][i]["description"]
+
+          // description = {}
+          // for(j=0;j<areaPokedex["pokedex"][area][localNo]["status"][i]["description"].length;j++){
+
+          // }
 
           status.push(detaile)
         }

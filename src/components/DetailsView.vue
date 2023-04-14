@@ -74,6 +74,7 @@ useHead({
       <TypeView :type1="pokedate[1].status[index].type1" :type2="pokedate[1].status[index].type2" />
       <StatusChart :statusData="pokedate[1].status[index]" />
       <AbilityView :ability1="pokedate[1].status[index].ability1" :ability2="pokedate[1].status[index].ability2" :dream_ability="pokedate[1].status[index].dream_ability" />
+      <DescriptionView :description="pokedate[1].status[index].description" />
     </v-carousel-item>
   </v-carousel>
   <SnsView :siteTitle="metaTitle" />
