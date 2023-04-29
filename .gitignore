@@ -30,3 +30,4 @@ dist-ssr
 .cache
 .output
 .env
+src/assets/pokedex
