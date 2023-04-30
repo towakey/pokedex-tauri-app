@@ -8,6 +8,7 @@
     "build": "nuxt build",
     "preview": "nuxt preview",
     "generate": "nuxi generate",
+    "generate:local": "cross-env APP_MODE=\"local\" nuxi generate",
     "postinstall": "nuxt prepare",
     "tauri": "tauri"
   },
@@ -15,13 +16,14 @@
     "@tauri-apps/api": "^1.2.0",
     "chart.js": "^4.1.2",
     "mdi": "^2.2.43",
-    "nuxt": "3.0.0",
+    "nuxt": "^3.4.2",
     "vue-chartjs": "^5.2.0",
     "vue-gtag-next": "^1.14.0",
-    "vuetify": "^3.1.0"
+    "vuetify": "^3.1.5"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.2.2",
-    "sass": "^1.57.1"
+    "cross-env": "^7.0.3",
+    "sass": "^1.59.2"
   }
 }
