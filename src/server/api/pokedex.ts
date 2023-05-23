@@ -1,4 +1,4 @@
-import Config from 'chart.js/dist/core/core.config'
+// import Config from 'chart.js/dist/core/core.config'
 
 export default defineEventHandler(async (event) => {
   const global_: any = await import('~/assets/pokedex/pokedex/pokedex.json')
@@ -16,6 +16,26 @@ export default defineEventHandler(async (event) => {
   var indexMin: Number
   var indexMax: Number
   var offset: Number      // イッシュ図鑑ではビクティニが図鑑No.0の為の対応
+
+  const gameList: { [key: string]: string } = {
+    "kanto": "Red_Green_Blue_Yellow",
+    "johto": "Gold_Silver_Crystal",
+    "hoenn": "Ruby_Sapphire_Emerald",
+    "sinnoh": "Diamond_Pearl_Platinum",
+    "unova_bw": "Black_White",
+    "unova_b2w2": "Black2_White2",
+    "central_kalos": "X_Y",
+    "coast_kalos": "X_Y",
+    "mountain_kalos": "X_Y",
+    "alola_sm": "Sun_Moon",
+    "alola_usum": "UltraSun_UltraMoon",
+    "galar": "Sword_Shield",
+    "isle_of_armor": "Sword_Shield",
+    "crown_tundra": "Sword_Shield",
+    "hisui": "LegendsArceus",
+    "paldea": "Scarlet_Violet",
+  }
+
   switch (area_type){
     case "global":
       area = "global"
@@ -274,25 +294,27 @@ export default defineEventHandler(async (event) => {
         pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
         pokedex["weight"] = global["pokedex"][pokedex["globalNo"] - 1]["weight"]
         pokedex["classification"] = global["pokedex"][pokedex["globalNo"] - 1]["classification"]
-        pokedex["type1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type1"]
-        pokedex["type2"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type2"]
-        pokedex["ability1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["ability1"]
-        pokedex["ability2"] = areaPokedex["pokedex"][area][localNo]["status"][0]["ability2"]
-        pokedex["dream_ability"] = areaPokedex["pokedex"][area][localNo]["status"][0]["dream_ability"]
-        pokedex["hp"] = areaPokedex["pokedex"][area][localNo]["status"][0]["hp"]
-        pokedex["attack"] = areaPokedex["pokedex"][area][localNo]["status"][0]["attack"]
-        pokedex["defense"] = areaPokedex["pokedex"][area][localNo]["status"][0]["defense"]
-        pokedex["special_attack"] = areaPokedex["pokedex"][area][localNo]["status"][0]["special_attack"]
-        pokedex["special_defense"] = areaPokedex["pokedex"][area][localNo]["status"][0]["special_defense"]
-        pokedex["speed"] = areaPokedex["pokedex"][area][localNo]["status"][0]["speed"]
+        // pokedex["type1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type1"]
+        // pokedex["type2"] = areaPokedex["pokedex"][area][localNo]["status"][0]["type2"]
+        // pokedex["ability1"] = areaPokedex["pokedex"][area][localNo]["status"][0]["ability1"]
+        // pokedex["ability2"] = areaPokedex["pokedex"][area][localNo]["status"][0]["ability2"]
+        // pokedex["dream_ability"] = areaPokedex["pokedex"][area][localNo]["status"][0]["dream_ability"]
+        // pokedex["hp"] = areaPokedex["pokedex"][area][localNo]["status"][0]["hp"]
+        // pokedex["attack"] = areaPokedex["pokedex"][area][localNo]["status"][0]["attack"]
+        // pokedex["defense"] = areaPokedex["pokedex"][area][localNo]["status"][0]["defense"]
+        // pokedex["special_attack"] = areaPokedex["pokedex"][area][localNo]["status"][0]["special_attack"]
+        // pokedex["special_defense"] = areaPokedex["pokedex"][area][localNo]["status"][0]["special_defense"]
+        // pokedex["speed"] = areaPokedex["pokedex"][area][localNo]["status"][0]["speed"]
 
         var i:Number
         var j:number
         for(i=0;i<areaPokedex["pokedex"][area][localNo]["status"].length;i++){
           detaile = {}
           detaile["form"] = areaPokedex["pokedex"][area][localNo]["status"][i]["form"]
-          detaile["type1"] = areaPokedex["pokedex"][area][localNo]["status"][i]["type1"]
-          detaile["type2"] = areaPokedex["pokedex"][area][localNo]["status"][i]["type2"]
+
+          detaile["type1"] = {"name": areaPokedex["pokedex"][area][localNo]["status"][i]["type1"], "effective": ""}
+          detaile["type2"] = {"name": areaPokedex["pokedex"][area][localNo]["status"][i]["type2"], "effective": ""}
+
           detaile["ability1"] = areaPokedex["pokedex"][area][localNo]["status"][i]["ability1"]
           detaile["ability2"] = areaPokedex["pokedex"][area][localNo]["status"][i]["ability2"]
           detaile["dream_ability"] = areaPokedex["pokedex"][area][localNo]["status"][i]["dream_ability"]

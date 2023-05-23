@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-const props = defineProps(["pokedexArea", "type1", "type2"])
+const props = defineProps(["pokedexArea", "type1", "type2", "pokedate"])
 var typeDialog = ref(false)
 
 const typeList: string[] = [
@@ -24,14 +24,11 @@ const typeList: string[] = [
 if( props.pokedexArea == 'johto' || props.pokedexArea == 'hoenn' || props.pokedexArea == 'sinnoh' || props.pokedexArea == 'unova_bw' || props.pokedexArea == 'unova_b2w2' ){
   typeList.push('あく')
   typeList.push('はがね')
-  console.log('johto')
 }else if( props.pokedexArea == 'central_kalos' || props.pokedexArea == 'coast_kalos' || props.pokedexArea == 'mountain_kalos' || props.pokedexArea == 'alola_sm' || props.pokedexArea == 'alola_usum' || props.pokedexArea == 'galar' || props.pokedexArea == 'isle_of_armor' || props.pokedexArea == 'crown_tundra' || props.pokedexArea == 'hisui'  || props.pokedexArea == 'paldea' ){
   typeList.push('あく')
   typeList.push('はがね')
   typeList.push('フェアリー')
-  console.log('xy')
 }
-console.log(typeList[0])
 const gameList: { [key: string]: string } = {
   "kanto": "Red_Green_Blue_Yellow",
   "johto": "Gold_Silver_Crystal",
@@ -62,20 +59,36 @@ let damage4 = ref([])
 // console.log(gameList[props.pokedexArea])
 
 for(let val in typeList){
-  const types = await useFetch('/api/type?game='+gameList[props.pokedexArea]+'&attackType='+typeList[val]+'&defenceType1='+props.type1+'&defenceType2='+props.type2, { refresh: true })
+  // const types = await useFetch('/api/type?game='+gameList[props.pokedexArea]+'&attackType='+typeList[val]+'&defenceType1='+props.type1+'&defenceType2='+props.type2, { refresh: true })
+  const types = props.pokedate.type_list
   // console.log(typeList[val])
   // console.log(types.data.value.type)
-  if(types.data.value.type == "0"){
+  // if(types.data.value.type == "0"){
+  // if(types.data.value.type == "0"){
+  //   damage0.value[damage0.value.length]=ref(typeList[val])
+  // }else if(types.data.value.type == "0.25"){
+  //   damage025.value[damage025.value.length]=ref(typeList[val])
+  // }else if(types.data.value.type == "0.5"){
+  //   damage05.value[damage05.value.length]=ref(typeList[val])
+  // }else if(types.data.value.type == "1"){
+  //   damage1.value[damage1.value.length]=ref(typeList[val])
+  // }else if(types.data.value.type == "2"){
+  //   damage2.value[damage2.value.length]=ref(typeList[val])
+  // }else if(types.data.value.type == "4"){
+  //   damage4.value[damage4.value.length]=ref(typeList[val])
+  // }
+  // console.log(types[typeList[val]])
+  if(types[typeList[val]] == "0"){
     damage0.value[damage0.value.length]=ref(typeList[val])
-  }else if(types.data.value.type == "0.25"){
+  }else if(types[typeList[val]] == "0.25"){
     damage025.value[damage025.value.length]=ref(typeList[val])
-  }else if(types.data.value.type == "0.5"){
+  }else if(types[typeList[val]] == "0.5"){
     damage05.value[damage05.value.length]=ref(typeList[val])
-  }else if(types.data.value.type == "1"){
+  }else if(types[typeList[val]] == "1"){
     damage1.value[damage1.value.length]=ref(typeList[val])
-  }else if(types.data.value.type == "2"){
+  }else if(types[typeList[val]] == "2"){
     damage2.value[damage2.value.length]=ref(typeList[val])
-  }else if(types.data.value.type == "4"){
+  }else if(types[typeList[val]] == "4"){
     damage4.value[damage4.value.length]=ref(typeList[val])
   }
 }

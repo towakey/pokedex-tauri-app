@@ -10,6 +10,30 @@
 
   // console.log(props.pokedexArea)
 
+  const gameList: { [key: string]: string } = {
+    "kanto": "Red_Green_Blue_Yellow",
+    "johto": "Gold_Silver_Crystal",
+    "hoenn": "Ruby_Sapphire_Emerald",
+    "sinnoh": "Diamond_Pearl_Platinum",
+    "unova_bw": "Black_White",
+    "unova_b2w2": "Black2_White2",
+    "central_kalos": "X_Y",
+    "coast_kalos": "X_Y",
+    "mountain_kalos": "X_Y",
+    "alola_sm": "Sun_Moon",
+    "alola_usum": "UltraSun_UltraMoon",
+    "galar": "Sword_Shield",
+    "isle_of_armor": "Sword_Shield",
+    "crown_tundra": "Sword_Shield",
+    "hisui": "LegendsArceus",
+    "paldea": "Scarlet_Violet",
+  }
+  let types
+  for(let val in pokedate[1].status){
+    types = await useFetch('/api/type?game='+gameList[props.pokedexArea]+'&attackType=list&defenceType1='+pokedate[1].status[val].type1.name+'&defenceType2='+pokedate[1].status[val].type2.name, { refresh: true })
+    pokedate[1].status[val]["type_list"]=types.data.value.type
+    // console.log(pokedate[1].status[val].type_list)
+  }
 
   const nextModel = () => {
     if((pokedate[1].status.length - 1) <= model.value){
@@ -74,7 +98,7 @@ useHead({
       v-for="(item, index) in pokedate[1].status" :key="index"
     >
       <!-- <h2>{{ pokedate[1].status[index].form }}</h2> -->
-      <TypeView :pokedexArea="props.pokedexArea" :type1="pokedate[1].status[index].type1" :type2="pokedate[1].status[index].type2"/>
+      <TypeView :pokedexArea="props.pokedexArea" :type1="pokedate[1].status[index].type1.name" :type2="pokedate[1].status[index].type2.name" :pokedate="pokedate[1].status[index]"/>
       <StatusChart :statusData="pokedate[1].status[index]" />
       <AbilityView :ability1="pokedate[1].status[index].ability1" :ability2="pokedate[1].status[index].ability2" :dream_ability="pokedate[1].status[index].dream_ability" />
       <DescriptionView :description="pokedate[1].status[index].description" />
