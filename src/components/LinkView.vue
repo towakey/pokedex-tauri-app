@@ -2,7 +2,9 @@
   defineProps(["pokedexArea", "pokedexName", "pokedate"])
 </script>
 <template>
-  <v-card>
+  <v-card
+  elevation="0"
+  >
     <v-card-actions>
       <v-btn
         variant = "tonal"

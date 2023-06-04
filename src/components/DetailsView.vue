@@ -96,6 +96,7 @@ useHead({
 
 </script>
 <template>
+  <v-container class="">
   <LinkView :pokedexArea="pokedexArea" :pokedexName="pokedexName" :pokedate="pokedate" />
   <NameView :no="pokedate[1].no" :name="pokedate[1].name" :classification="pokedate[1].classification" :height="pokedate[1].height" :weight="pokedate[1].weight" />
   <!-- <TypeView :type1="pokedate[1].type1" :type2="pokedate[1].type2" />
@@ -103,6 +104,7 @@ useHead({
   <AbilityView :ability1="pokedate[1].ability1" :ability2="pokedate[1].ability2" :dream_ability="pokedate[1].dream_ability" /> -->
   <v-card
     v-if="pokedate[1].status.length > 1"
+    elevation="0"
   >
     <v-card-actions>
       <v-btn
@@ -128,7 +130,7 @@ useHead({
     </v-carousel-item>
   </v-carousel>
   <SnsView :siteTitle="metaTitle" />
-  
+  </v-container>  
 </template>
 <style>
 </style>

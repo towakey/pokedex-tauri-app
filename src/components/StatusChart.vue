@@ -1,5 +1,7 @@
 <template>
-  <v-card>
+  <v-card
+  elevation="0"
+  >
     <v-card-text>
       <Bar
         id="my-chart-id"

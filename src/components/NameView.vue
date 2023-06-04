@@ -2,7 +2,9 @@
   defineProps(["no", "name", "classification", "height", "weight"])
 </script>
 <template>
-  <v-card>
+  <v-card
+  elevation="0"
+  >
     <v-card-title><h1>No.{{ no }} {{ name }}</h1></v-card-title>
     <v-card-subtitle>{{ classification }}</v-card-subtitle>
     <v-card-text>
