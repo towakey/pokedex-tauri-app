@@ -29,10 +29,33 @@
     "paldea": "Scarlet_Violet",
   }
   let types
+  let ability:any
+
   for(let val in pokedate[1].status){
     types = await useFetch('/api/type?game='+gameList[props.pokedexArea]+'&attackType=list&defenceType1='+pokedate[1].status[val].type1.name+'&defenceType2='+pokedate[1].status[val].type2.name, { refresh: true })
     pokedate[1].status[val]["type_list"]=types.data.value.type
-    // console.log(pokedate[1].status[val].type_list)
+
+    if(pokedate[1].status[val].ability1!==""){
+      ability = await useFetch('/api/ability?game='+gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].ability1, { refresh: true })
+      pokedate[1].status[val]["ability1_description"] = ability.data.value.ability
+    }else{
+      pokedate[1].status[val]["ability1_description"] = ""
+    }
+
+    if(pokedate[1].status[val].ability2!==""){
+      ability = await useFetch('/api/ability?game='+gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].ability2, { refresh: true })
+      pokedate[1].status[val]["ability2_description"] = ability.data.value.ability
+    }else{
+      pokedate[1].status[val]["ability2_description"] = ""
+    }
+
+    if(pokedate[1].status[val].dream_ability!==""){
+      ability = await useFetch('/api/ability?game='+gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].dream_ability, { refresh: true })
+      pokedate[1].status[val]["dream_ability_description"] = ability.data.value.ability
+    }else{
+      pokedate[1].status[val]["dream_ability_description"] = ""
+    }
+
   }
 
   const nextModel = () => {
@@ -100,7 +123,7 @@ useHead({
       <!-- <h2>{{ pokedate[1].status[index].form }}</h2> -->
       <TypeView :pokedexArea="props.pokedexArea" :type1="pokedate[1].status[index].type1.name" :type2="pokedate[1].status[index].type2.name" :pokedate="pokedate[1].status[index]"/>
       <StatusChart :statusData="pokedate[1].status[index]" />
-      <AbilityView :ability1="pokedate[1].status[index].ability1" :ability2="pokedate[1].status[index].ability2" :dream_ability="pokedate[1].status[index].dream_ability" />
+      <AbilityView :ability1="pokedate[1].status[index].ability1" :ability2="pokedate[1].status[index].ability2" :dream_ability="pokedate[1].status[index].dream_ability" :pokedexArea="props.pokedexArea" :pokedate="pokedate[1].status[index]" />
       <DescriptionView :description="pokedate[1].status[index].description" />
     </v-carousel-item>
   </v-carousel>
