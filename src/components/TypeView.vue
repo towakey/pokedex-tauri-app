@@ -151,6 +151,7 @@ for(let val in typeList){
   <v-dialog
     v-model="typeDialog"
   >
+    <v-container>
     <v-card>
       <v-card-item>
         <h2>こうかはばつぐんだ(4倍)</h2>
@@ -365,6 +366,7 @@ for(let val in typeList){
         <v-btn block @click="typeDialog = false">CLOSE</v-btn>
       </v-card-item>
     </v-card>
+  </v-container>
   </v-dialog>
 </ClientOnly>
 </template>

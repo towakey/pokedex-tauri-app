@@ -29,28 +29,48 @@ useHead({
 </script>
 <template>
   <v-container>
-    <NuxtLink
+    <v-row>
+      <v-col
+      cols="12"
+      sm="4"
       v-for="list in pokedate" :key="list.id"
-      :to="{path: `/pokedex/${pokedexArea}/${list.no}`}"
-      class="pokedexMenu"
-    >
-    <v-card v-if="list.no!='' && props.pokedexArea == 'global'">
-        <v-card-title>
-          <span class="pokemonName">No.{{ list.no }} {{ list.name }}</span><span class="gameVersion">{{ pokedexId2GameVersion(list.no) }}</span>
-        </v-card-title>
-      </v-card>
-      <v-card v-else>
-        <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
-      </v-card>
-    </NuxtLink>
+      >
+        <NuxtLink
+          :to="{path: `/pokedex/${pokedexArea}/${list.no}`}"
+          class="pokedexMenu"
+        >
+          <v-card
+          v-if="list.no!='' && props.pokedexArea == 'global'"
+          class="pokedex-card"
+          elevation="0"
+          color="#e3e1e1"
+          >
+            <v-card-title>
+              <span class="pokemonName">No.{{ list.no }} {{ list.name }}</span><span class="gameVersion">{{ pokedexId2GameVersion(list.no) }}</span>
+            </v-card-title>
+          </v-card>
+          <v-card
+          v-else
+          class="pokedex-card"
+          elevation="0"
+          color="#e3e1e1"
+          >
+            <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
+          </v-card>
+        </NuxtLink>
+      </v-col>
+    </v-row>
+    <SnsView :siteTitle="metaTitle" />
   </v-container>
-  <SnsView :siteTitle="metaTitle" />
 </template>
 <style>
 .pokedexMenu{
+  text-align: center;
   text-decoration: none;
 }
-.pokemonName{
+.pokedex-card{
+  /* width: 450px; */
+  height: 70px;
 }
 .gameVersion{
   float: right;

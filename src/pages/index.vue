@@ -4,7 +4,7 @@ definePageMeta({
 })
 </script>
 <template>
-  <v-container class="bg-surface-variant">
+  <v-container class="">
     <v-row>
       <v-col>
         <NuxtLink
