@@ -192,7 +192,7 @@ export default defineEventHandler(async (event) => {
         // console.log("global:index")
         for(var value in global["pokedex"]){
           pokedex = {}
-          pokedex["no"] = global["pokedex"][value]["id"]
+          pokedex["no"] = String(global["pokedex"][value]["id"])
           pokedex["name"] = global["pokedex"][value]["name"]["jpn"]
           pokelist.push(pokedex)
         }

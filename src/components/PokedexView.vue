@@ -6,6 +6,16 @@
   const Id2Name = pokedexId2Name(props.pokedexArea)
   const metaTitle = ref(Id2Name)
 
+  const searchTerm = ref()
+
+  const pokedateItems = computed(() => {
+    if(searchTerm.value === ''){
+      return pokedate
+    }else{
+      return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value))
+    }
+  })
+
 useHead({
   title: metaTitle,
   meta: [
@@ -30,14 +40,26 @@ useHead({
 <template>
   <v-container>
     <v-row>
+      <v-col>
+        <v-text-field v-model="searchTerm" label="検索" />
+        <!-- <ul
+        v-for="item in pokedateItems" :key="item"
+        >
+          <li>
+            {{ Object.values(item).includes(searchTerm) }}{{ item }}
+          </li>
+        </ul> -->
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col
       cols="12"
       sm="4"
-      v-for="list in pokedate" :key="list.id"
+      v-for="list in pokedateItems" :key="list"
       >
         <NuxtLink
           :to="{path: `/pokedex/${pokedexArea}/${list.no}`}"
-          class="pokedexMenu"
+          class="link-decoration"
         >
           <v-card
           v-if="list.no!='' && props.pokedexArea == 'global'"
@@ -46,8 +68,11 @@ useHead({
           color="#e3e1e1"
           >
             <v-card-title>
-              <span class="pokemonName">No.{{ list.no }} {{ list.name }}</span><span class="gameVersion">{{ pokedexId2GameVersion(list.no) }}</span>
+              <span class="pokemonName">No.{{ list.no }} {{ list.name }}</span>
             </v-card-title>
+            <v-card-text>
+              <span class="gameVersion">{{ pokedexId2GameVersion(list.no) }}</span>
+            </v-card-text>
           </v-card>
           <v-card
           v-else
@@ -64,16 +89,16 @@ useHead({
   </v-container>
 </template>
 <style>
-.pokedexMenu{
+.link-decoration{
   text-align: center;
   text-decoration: none;
 }
 .pokedex-card{
   /* width: 450px; */
-  height: 70px;
+  height: auto;
 }
 .gameVersion{
-  float: right;
+  /* float: right; */
   color: darkgrey;
   font-size: small;
 }
