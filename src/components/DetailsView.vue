@@ -1,77 +1,58 @@
 <script setup lang="ts">
-  const props = defineProps(["pokedexArea", "pokedexName", "id"])
+const appConfig = useAppConfig()
+const props = defineProps(["pokedexArea", "pokedexName", "id"])
 
-  const loadPokedex = await useFetch('/api/pokedex?id='+props.id+'&area='+props.pokedexArea+'&type=details', { refresh: true })
-  const pokedate = loadPokedex.data.value.pokedex
+const loadPokedex = await useFetch('/api/pokedex?id='+props.id+'&area='+props.pokedexArea+'&type=details', { refresh: true })
+const pokedate = loadPokedex.data.value.pokedex
 
-  const metaTitle = ref(pokedate[1].name+" - "+props.pokedexName)
+const metaTitle = ref(pokedate[1].name+" - "+props.pokedexName)
 
-  var model = ref(0)
+var model = ref(0)
 
-  // console.log(props.pokedexArea)
+let types
+let ability:any
 
-  const gameList: { [key: string]: string } = {
-    "kanto": "Red_Green_Blue_Yellow",
-    "johto": "Gold_Silver_Crystal",
-    "hoenn": "Ruby_Sapphire_Emerald",
-    "sinnoh": "Diamond_Pearl_Platinum",
-    "unova_bw": "Black_White",
-    "unova_b2w2": "Black2_White2",
-    "central_kalos": "X_Y",
-    "coast_kalos": "X_Y",
-    "mountain_kalos": "X_Y",
-    "alola_sm": "Sun_Moon",
-    "alola_usum": "UltraSun_UltraMoon",
-    "galar": "Sword_Shield",
-    "isle_of_armor": "Sword_Shield",
-    "crown_tundra": "Sword_Shield",
-    "hisui": "LegendsArceus",
-    "paldea": "Scarlet_Violet",
-  }
-  let types
-  let ability:any
+for(let val in pokedate[1].status){
+  types = await useFetch('/api/type?game='+appConfig.gameList[props.pokedexArea]+'&attackType=list&defenceType1='+pokedate[1].status[val].type1.name+'&defenceType2='+pokedate[1].status[val].type2.name, { refresh: true })
+  pokedate[1].status[val]["type_list"]=types.data.value.type
 
-  for(let val in pokedate[1].status){
-    types = await useFetch('/api/type?game='+gameList[props.pokedexArea]+'&attackType=list&defenceType1='+pokedate[1].status[val].type1.name+'&defenceType2='+pokedate[1].status[val].type2.name, { refresh: true })
-    pokedate[1].status[val]["type_list"]=types.data.value.type
-
-    if(pokedate[1].status[val].ability1!==""){
-      ability = await useFetch('/api/ability?game='+gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].ability1, { refresh: true })
-      pokedate[1].status[val]["ability1_description"] = ability.data.value.ability
-    }else{
-      pokedate[1].status[val]["ability1_description"] = ""
-    }
-
-    if(pokedate[1].status[val].ability2!==""){
-      ability = await useFetch('/api/ability?game='+gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].ability2, { refresh: true })
-      pokedate[1].status[val]["ability2_description"] = ability.data.value.ability
-    }else{
-      pokedate[1].status[val]["ability2_description"] = ""
-    }
-
-    if(pokedate[1].status[val].dream_ability!==""){
-      ability = await useFetch('/api/ability?game='+gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].dream_ability, { refresh: true })
-      pokedate[1].status[val]["dream_ability_description"] = ability.data.value.ability
-    }else{
-      pokedate[1].status[val]["dream_ability_description"] = ""
-    }
-
+  if(pokedate[1].status[val].ability1!==""){
+    ability = await useFetch('/api/ability?game='+appConfig.gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].ability1, { refresh: true })
+    pokedate[1].status[val]["ability1_description"] = ability.data.value.ability
+  }else{
+    pokedate[1].status[val]["ability1_description"] = ""
   }
 
-  const nextModel = () => {
-    if((pokedate[1].status.length - 1) <= model.value){
-      model.value = 0
-    }else{
-      model.value++
-    }
+  if(pokedate[1].status[val].ability2!==""){
+    ability = await useFetch('/api/ability?game='+appConfig.gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].ability2, { refresh: true })
+    pokedate[1].status[val]["ability2_description"] = ability.data.value.ability
+  }else{
+    pokedate[1].status[val]["ability2_description"] = ""
   }
-  const prevModel = () => {
-    if(model.value == 0){
-      model.value = pokedate[1].status.length - 1
-    }else{
-      model.value--
-    }
+
+  if(pokedate[1].status[val].dream_ability!==""){
+    ability = await useFetch('/api/ability?game='+appConfig.gameList[props.pokedexArea]+'&ability='+pokedate[1].status[val].dream_ability, { refresh: true })
+    pokedate[1].status[val]["dream_ability_description"] = ability.data.value.ability
+  }else{
+    pokedate[1].status[val]["dream_ability_description"] = ""
   }
+
+}
+
+const nextModel = () => {
+  if((pokedate[1].status.length - 1) <= model.value){
+    model.value = 0
+  }else{
+    model.value++
+  }
+}
+const prevModel = () => {
+  if(model.value == 0){
+    model.value = pokedate[1].status.length - 1
+  }else{
+    model.value--
+  }
+}
 
 useHead({
   title: metaTitle,

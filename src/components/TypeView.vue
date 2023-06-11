@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const appConfig = useAppConfig()
 
 const props = defineProps(["pokedexArea", "type1", "type2", "pokedate"])
 var typeDialog = ref(false)
@@ -29,24 +30,6 @@ if( props.pokedexArea == 'johto' || props.pokedexArea == 'hoenn' || props.pokede
   typeList.push('はがね')
   typeList.push('フェアリー')
 }
-const gameList: { [key: string]: string } = {
-  "kanto": "Red_Green_Blue_Yellow",
-  "johto": "Gold_Silver_Crystal",
-  "hoenn": "Ruby_Sapphire_Emerald",
-  "sinnoh": "Diamond_Pearl_Platinum",
-  "unova_bw": "Black_White",
-  "unova_b2w2": "Black2_White2",
-  "central_kalos": "X_Y",
-  "coast_kalos": "X_Y",
-  "mountain_kalos": "X_Y",
-  "alola_sm": "Sun_Moon",
-  "alola_usum": "UltraSun_UltraMoon",
-  "galar": "Sword_Shield",
-  "isle_of_armor": "Sword_Shield",
-  "crown_tundra": "Sword_Shield",
-  "hisui": "LegendsArceus",
-  "paldea": "Scarlet_Violet",
-}
 let damage0 = ref([])
 let damage025 = ref([])
 let damage05 = ref([])
@@ -54,30 +37,10 @@ let damage1 = ref([])
 let damage2 = ref([])
 let damage4 = ref([])
 
-// console.log("TypeView:")
-// console.log(props.pokedexArea)
-// console.log(gameList[props.pokedexArea])
 
 for(let val in typeList){
   // const types = await useFetch('/api/type?game='+gameList[props.pokedexArea]+'&attackType='+typeList[val]+'&defenceType1='+props.type1+'&defenceType2='+props.type2, { refresh: true })
   const types = props.pokedate.type_list
-  // console.log(typeList[val])
-  // console.log(types.data.value.type)
-  // if(types.data.value.type == "0"){
-  // if(types.data.value.type == "0"){
-  //   damage0.value[damage0.value.length]=ref(typeList[val])
-  // }else if(types.data.value.type == "0.25"){
-  //   damage025.value[damage025.value.length]=ref(typeList[val])
-  // }else if(types.data.value.type == "0.5"){
-  //   damage05.value[damage05.value.length]=ref(typeList[val])
-  // }else if(types.data.value.type == "1"){
-  //   damage1.value[damage1.value.length]=ref(typeList[val])
-  // }else if(types.data.value.type == "2"){
-  //   damage2.value[damage2.value.length]=ref(typeList[val])
-  // }else if(types.data.value.type == "4"){
-  //   damage4.value[damage4.value.length]=ref(typeList[val])
-  // }
-  // console.log(types[typeList[val]])
   if(types[typeList[val]] == "0"){
     damage0.value[damage0.value.length]=ref(typeList[val])
   }else if(types[typeList[val]] == "0.25"){
@@ -136,17 +99,6 @@ for(let val in typeList){
       <div style="" v-else-if='type2 !== "" && type2 === "フェアリー"' class="type_Fairy">{{ type2 }}</div>
     </v-card-title>
   </v-card>
-  <!-- <v-btn>
-    test
-    <v-dialog
-      v-model="typeDialog"
-      activator="parent"
-    >
-      <v-sheet>
-        dialog
-      </v-sheet>
-    </v-dialog>
-  </v-btn> -->
   <ClientOnly>
   <v-dialog
     v-model="typeDialog"
@@ -310,59 +262,6 @@ for(let val in typeList){
           <div v-else-if='val.value === "フェアリー"' style="margin: 5px;padding: 5px;border-radius: 10px;" class="type_Fairy">{{ val.value }}</div>
         </div>
 
-        <!-- <h1>こうかはふつう</h1>
-        <div
-          v-for="(key, index) in damage1"
-          :key="index"
-        >{{ index }}</div> -->
-
-        <!-- <v-list lines="two">
-          <v-list-item>
-            <v-list-item-title>こうかはばつぐんだ(4倍)</v-list-item-title>
-            <v-list-item-subtitle>
-              <div
-                v-for="(key, index) in damage4"
-                :key="key"
-              >{{ key }}</div>
-            </v-list-item-subtitle>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>こうかはばつぐんだ(2倍)</v-list-item-title>
-            <v-list-item-subtitle>
-              <div
-                v-for="(key, index) in damage2"
-                :key="key"
-              >{{ key }}</div>
-            </v-list-item-subtitle>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>こうかはふつう</v-list-item-title>
-            <v-list-item-subtitle>
-              <div
-                v-for="(key, index) in damage1"
-                :key="key"
-              >{{ key }}</div>
-            </v-list-item-subtitle>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>こうかはいまひとつ</v-list-item-title>
-            <v-list-item-subtitle>
-              <div
-                v-for="(key, index) in damage05"
-                :key="key"
-              >{{ damage05[key] }}</div>
-            </v-list-item-subtitle>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>こうかはない</v-list-item-title>
-            <v-list-item-subtitle>
-              <div
-                v-for="(key, index) in damage0"
-                :key="key"
-              >{{ damage0[key] }}</div>
-            </v-list-item-subtitle>
-          </v-list-item>
-        </v-list> -->
         <v-btn block @click="typeDialog = false">CLOSE</v-btn>
       </v-card-item>
     </v-card>

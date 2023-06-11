@@ -1,5 +1,7 @@
 // import { process } from "@tauri-apps/api";
 import { defineNuxtConfig } from "nuxt/config";
+import { nustStorage } from 'nuxt-storage';
+
 // import { Static } from "nuxt/dist/app/compat/capi";
 // import { useFetch } from "./.nuxt/imports";
 // https://nuxt.com/docs/api/configuration/nuxt-config
@@ -33,7 +35,11 @@ export default defineNuxtConfig({
     baseURL: getBaseUrl()
     // baseURL: '/public'
   },
-  css: ["vuetify/lib/styles/main.sass", "mdi/css/materialdesignicons.min.css"],
+  css: [
+    "vuetify/lib/styles/main.sass",
+    "mdi/css/materialdesignicons.min.css",
+    "@/assets/styles/main.scss"
+  ],
   build: {
     transpile: ["vuetify"],
   },

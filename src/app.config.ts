@@ -1,0 +1,21 @@
+export default defineAppConfig({
+  title: 'app.config.ts',
+  gameList: {
+    "kanto": "Red_Green_Blue_Yellow",
+    "johto": "Gold_Silver_Crystal",
+    "hoenn": "Ruby_Sapphire_Emerald",
+    "sinnoh": "Diamond_Pearl_Platinum",
+    "unova_bw": "Black_White",
+    "unova_b2w2": "Black2_White2",
+    "central_kalos": "X_Y",
+    "coast_kalos": "X_Y",
+    "mountain_kalos": "X_Y",
+    "alola_sm": "Sun_Moon",
+    "alola_usum": "UltraSun_UltraMoon",
+    "galar": "Sword_Shield",
+    "isle_of_armor": "Sword_Shield",
+    "crown_tundra": "Sword_Shield",
+    "hisui": "LegendsArceus",
+    "paldea": "Scarlet_Violet",
+  },
+})

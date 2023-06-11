@@ -8,6 +8,8 @@
 
   const searchTerm = ref()
 
+  // nuxtStorage.localStorage.setData('test','value')
+
   const pokedateItems = computed(() => {
     if(searchTerm.value === ''){
       return pokedate
@@ -42,13 +44,6 @@ useHead({
     <v-row>
       <v-col>
         <v-text-field v-model="searchTerm" label="検索" />
-        <!-- <ul
-        v-for="item in pokedateItems" :key="item"
-        >
-          <li>
-            {{ Object.values(item).includes(searchTerm) }}{{ item }}
-          </li>
-        </ul> -->
       </v-col>
     </v-row>
     <v-row>
@@ -89,13 +84,9 @@ useHead({
   </v-container>
 </template>
 <style>
-.link-decoration{
-  text-align: center;
-  text-decoration: none;
-}
 .pokedex-card{
   /* width: 450px; */
-  height: auto;
+  /* height: auto; */
 }
 .gameVersion{
   /* float: right; */
