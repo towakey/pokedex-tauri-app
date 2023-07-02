@@ -9,6 +9,7 @@ definePageMeta({
       <v-col>
         <NuxtLink
           :to="{path: '/pokedex'}"
+          class="link-decoration"
         >
           <v-card>
             <v-card-title
@@ -20,6 +21,7 @@ definePageMeta({
       <v-col>
         <NuxtLink
           :to="{path: '/webapp'}"
+          class="link-decoration"
         >
           <v-card>
             <v-card-title
@@ -31,7 +33,9 @@ definePageMeta({
     </v-row>
     <v-row>
       <v-col>
-        <a href="/blog">
+        <a href="/blog"
+        class="link-decoration"
+        >
           <v-card>
             <v-card-title
               style="text-align:center"
@@ -40,17 +44,5 @@ definePageMeta({
         </a>
       </v-col>
     </v-row>
-    <!-- <v-row no-gutters>
-      <v-col>
-        <v-card class=".v-col-auto">
-          <v-card-title>カント―図鑑</v-card-title>
-        </v-card>
-      </v-col>
-      <v-col>
-        <v-card class=".v-col-auto">
-          <v-card-title>ジョウト図鑑</v-card-title>
-        </v-card>
-      </v-col>
-    </v-row> -->
   </v-container>
 </template>

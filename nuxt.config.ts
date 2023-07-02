@@ -1,6 +1,5 @@
 // import { process } from "@tauri-apps/api";
 import { defineNuxtConfig } from "nuxt/config";
-import { nustStorage } from 'nuxt-storage';
 
 // import { Static } from "nuxt/dist/app/compat/capi";
 // import { useFetch } from "./.nuxt/imports";
@@ -49,5 +48,10 @@ export default defineNuxtConfig({
     dirs: [
       'composables/**',
     ],
+  },
+  modules: [
+    '@vueuse/nuxt',
+  ],
+  storage: {
   },
 })

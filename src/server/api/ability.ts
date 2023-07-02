@@ -8,9 +8,12 @@ export default defineEventHandler(async (event) => {
   const ability: string = String(query.ability)
 
   let result: any
-
-  result = abilitys[ability][game]
-
+  // console.log(ability)
+  if(game in abilitys[ability]){
+    result = abilitys[ability][game]
+  }else{
+    result = ""
+  }
 
   return {
     "result": "ability",

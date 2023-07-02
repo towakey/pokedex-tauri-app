@@ -2,8 +2,11 @@
 const appConfig = useAppConfig()
 const props = defineProps(["pokedexArea", "pokedexName", "id"])
 
+// console.log(`id=>${props.id}`)
 const loadPokedex = await useFetch('/api/pokedex?id='+props.id+'&area='+props.pokedexArea+'&type=details', { refresh: true })
 const pokedate = loadPokedex.data.value.pokedex
+const { data: pokedexList} = await useFetch('/api/pokedex?id=1&area='+props.pokedexArea+'&type=index', { refresh: true })
+const pokedex = pokedexList.value.pokedex
 
 const metaTitle = ref(pokedate[1].name+" - "+props.pokedexName)
 
@@ -36,8 +39,8 @@ for(let val in pokedate[1].status){
   }else{
     pokedate[1].status[val]["dream_ability_description"] = ""
   }
-
 }
+
 
 const nextModel = () => {
   if((pokedate[1].status.length - 1) <= model.value){
@@ -110,8 +113,9 @@ useHead({
       <DescriptionView :description="pokedate[1].status[index].description" />
     </v-carousel-item>
   </v-carousel>
+  <CaptureStatus :pokedexArea="props.pokedexArea" :no="pokedate[1].no" :pokedex="pokedex" />
   <SnsView :siteTitle="metaTitle" />
-  </v-container>  
+  </v-container>
 </template>
 <style>
 </style>

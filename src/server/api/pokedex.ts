@@ -186,6 +186,10 @@ export default defineEventHandler(async (event) => {
 
   let description:{[key: string]: string}
 
+  // console.log(`id:${id}`)
+  // console.log(`area:${area_type}`)
+  // console.log(`index:${index_type}`)
+
   if(area == "global"){
     switch (index_type){
       case "index":
@@ -260,8 +264,8 @@ export default defineEventHandler(async (event) => {
         var localNo
         
         pokedex = {}
-        localNo = Number(id - 2) + Number(offset)
-        if(localNo == indexMin){
+        localNo = (Number(id )- 2) + Number(offset)
+        if(localNo == indexMin || isNaN(localNo)){
           result[0]=""
         }else{
           pokedex["no"] = String(id - 1)
@@ -289,7 +293,6 @@ export default defineEventHandler(async (event) => {
         localNo = (Number(id) - 1) + Number(offset)
         pokedex["no"] = String(id)
         pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
-        // console.log("globalNo:"+pokedex["globalNo"])
         pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
         pokedex["height"] = global["pokedex"][pokedex["globalNo"] - 1]["height"]
         pokedex["weight"] = global["pokedex"][pokedex["globalNo"] - 1]["weight"]
@@ -342,7 +345,6 @@ export default defineEventHandler(async (event) => {
         if(localNo >= indexMax){
           result[2]=""
         }else{
-          // pokedex["no"] = areaPokedex["pokedex"][area][localNo]["no"]
           pokedex["no"] = String(id + 1)
           pokedex["globalNo"] = areaPokedex["pokedex"][area][localNo]["globalNo"]
           pokedex["name"] = global["pokedex"][pokedex["globalNo"] - 1]["name"]["jpn"]
@@ -366,10 +368,7 @@ export default defineEventHandler(async (event) => {
       case "exists":
         result = {check: false, localNo: 0}
         for(var value in areaPokedex["pokedex"][area]){
-          // console.log(id)
-          // console.log(areaPokedex["pokedex"][area][value]["globalNo"])
           if(areaPokedex["pokedex"][area][value]["globalNo"] == id ){
-            // console.log(areaPokedex["pokedex"][area][value]["globalNo"])
             result = {check: true, localNo: Number(value) + 1 - Number(offset)}
           }
         }
