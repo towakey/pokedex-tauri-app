@@ -37,10 +37,20 @@ export default defineNuxtConfig({
   css: [
     "vuetify/lib/styles/main.sass",
     "mdi/css/materialdesignicons.min.css",
-    "@/assets/styles/main.scss"
+    "@/assets/styles/main.scss",
+    '@fortawesome/fontawesome-svg-core/styles.css',
+  ],
+  plugins: [
+    '@/plugins/fontawesome.ts'
   ],
   build: {
-    transpile: ["vuetify"],
+    transpile: [
+      "vuetify",
+      '@fortawesome/fontawesome-svg-core',
+      // '@fortawesome/free-solid-svg-icons',
+      '@fortawesome/free-brands-svg-icons',
+      '@fortawesome/vue-fontawesome',
+    ],
   },
   srcDir: "src/",
   prerender: true,
