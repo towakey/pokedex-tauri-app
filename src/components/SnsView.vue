@@ -41,10 +41,10 @@
   }
   const shareOnMastodon = (siteTitle) => {
     const url=window.location.href
-    const text=props.siteTitle
+    const text=`${props.siteTitle}\n${url}`
     const hashtags=""
 
-    const mastodonIntentUrl = `${instanceURL.value}/share?text=${encodeURIComponent(text)}\n${encodeURIComponent(url)}`
+    const mastodonIntentUrl = `${instanceURL.value}/share?text=${encodeURIComponent(text)}`
 
     window.open(mastodonIntentUrl, '_blank', 'width=550,height=420')
   }
