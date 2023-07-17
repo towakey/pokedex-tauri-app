@@ -19,7 +19,7 @@ const area = useStorage(props.pokedexArea, defval, undefined, {
   serializer: {
     read: (v: any) => v ? JSON.parse(v) : null,
     write: (v: any) => JSON.stringify(v),
-  }    
+  }
 })
 
 onMounted(() => {
@@ -46,7 +46,7 @@ const pokedateItems = computed(() => {
   if(searchTerm.value === ''){
     return pokedate
   }else{
-    return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value))
+    return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
   }
 })
 
@@ -96,7 +96,7 @@ useHead({
   <v-container>
     <v-row>
       <v-col>
-        <v-text-field v-model="searchTerm" label="検索" />
+        <v-text-field v-model="searchTerm" label="検索(図鑑No / 名前 / タイプ)" />
       </v-col>
     </v-row>
     <v-row>

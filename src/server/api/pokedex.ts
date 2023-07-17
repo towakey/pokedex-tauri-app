@@ -254,6 +254,8 @@ export default defineEventHandler(async (event) => {
           pokedex["no"] = areaPokedex["pokedex"][area][value]["no"]
           if(pokedex["no"]!=""){
             pokedex["name"] = global["pokedex"][Number(areaPokedex["pokedex"][area][value]["globalNo"])-1]["name"]["jpn"]
+            pokedex["type1"] = areaPokedex["pokedex"][area][value]["status"][0]["type1"]
+            pokedex["type2"] = areaPokedex["pokedex"][area][value]["status"][0]["type2"]
             pokelist.push(pokedex)
           }
         }
