@@ -11,7 +11,6 @@
   onMounted(() => {
     instanceURL.value = localStorage.getItem('mastodonInstanceURL')
     isShared.value = !!instanceURL.value
-    console.log(instanceURL.value)
   })
 
   const saveInstanceURL = () => {

@@ -100,7 +100,12 @@ useHead({
   <v-container>
     <v-row>
       <v-col>
-        <v-text-field v-model="searchTerm" label="検索(図鑑No / 名前 / タイプ)" />
+        <v-text-field
+          v-if="pokedexArea === 'global'"
+          v-model="searchTerm" label="検索(図鑑No / 名前)" />
+        <v-text-field
+          v-else
+          v-model="searchTerm" label="検索(図鑑No / 名前 / タイプ)" />
       </v-col>
     </v-row>
     <v-row>
