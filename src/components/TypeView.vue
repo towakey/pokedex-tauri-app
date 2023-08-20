@@ -262,7 +262,7 @@ for(let val in typeList){
           <div v-else-if='val.value === "フェアリー"' style="margin: 5px;padding: 5px;border-radius: 10px;" class="type_Fairy">{{ val.value }}</div>
         </div>
 
-        <v-btn block @click="typeDialog = false">CLOSE</v-btn>
+        <v-btn block @click="typeDialog = false">とじる</v-btn>
       </v-card-item>
     </v-card>
   </v-container>
