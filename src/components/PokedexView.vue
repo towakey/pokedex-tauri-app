@@ -46,7 +46,11 @@ const pokedateItems = computed(() => {
   if(searchTerm.value === ''){
     return pokedate
   }else{
-    return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
+    if(props.pokedexArea === 'global'){
+      return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value))
+    }else{
+      return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
+    }
   }
 })
 
