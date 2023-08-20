@@ -260,7 +260,7 @@ useHead({
             <v-card-title>カントー図鑑</v-card-title>
             <v-card-text>
               <p>図鑑総数 151匹</p>
-              <p>ポケットモンスター赤/緑</p>
+              <p>ポケットモンスター赤/緑/青/ピカチュウ</p>
             </v-card-text>
           </v-card>
         </NuxtLink>
