@@ -46,7 +46,7 @@ useHead({
 </script>
 <template>
   <LinkView :pokedexArea="pokedexArea" :pokedexName="pokedexName" :pokedate="pokedate" />
-  <NameView :no="pokedate[1].no" :name="pokedate[1].name" :classification="pokedate[1].classification" :height="pokedate[1].height" :weight="pokedate[1].weight" />
+  <NameView :no="pokedate[1].no" :globalNo="pokedate[1].no" :name="pokedate[1].name" :classification="pokedate[1].classification" :height="pokedate[1].height" :weight="pokedate[1].weight" />
   <template v-for="(val, key) in pokedexList" :key="key">
     <NuxtLink
       v-if="val.exists.check"

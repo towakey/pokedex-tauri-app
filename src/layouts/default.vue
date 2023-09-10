@@ -62,7 +62,9 @@ useHead({
         color="primary"
         prominent
       >
-        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer">
+          <v-img src="/menu_icon.png"></v-img>
+        </v-app-bar-nav-icon>
         <v-toolbar-title>
           <NuxtLink
             :to="{path: `/`}"
