@@ -61,7 +61,18 @@ export default defineNuxtConfig({
   },
   modules: [
     '@vueuse/nuxt',
+    "@nuxt/content",
   ],
   storage: {
   },
+  content: {
+    highlight: {
+      theme: 'github-dark-dimmed',
+      preload: ['vb', 'ruby'],
+    },
+    documentDriven: false,
+  },
+  nitro: {
+    // preset: 'service-worker'
+  }
 })
