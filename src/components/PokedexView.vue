@@ -124,12 +124,31 @@ useHead({
           elevation="0"
           color="#e3e1e1"
           >
-            <v-card-title>
+            <!-- <v-card-title class="text-h5">
               <span class="pokemonName">No.{{ list.no }} {{ list.name }}</span>
             </v-card-title>
             <v-card-text>
               <span class="gameVersion">{{ pokedexId2GameVersion(list.no) }}</span>
-            </v-card-text>
+            </v-card-text> -->
+            <div
+            class="d-flex flex-no-wrap justify-space-between"
+            style="float: left;"
+            >
+              <v-avatar
+              class="ms-2"
+              size="100"
+              style="/*background-color: aqua;*/"
+              >
+                <v-img :src='`${"/img/" + ("0000"+list.no).slice(-4)+".png"}`'></v-img>
+              </v-avatar>
+              <div
+              style="/*background-color: aqua;*/"
+              >
+                <v-card-title
+                >No.{{ list.no }} {{ list.name }}</v-card-title>
+                <v-card-text>{{ pokedexId2GameVersion(list.no) }}</v-card-text>
+              </div>
+            </div>
           </v-card>
           <v-card
           v-else
@@ -149,10 +168,29 @@ useHead({
           elevation="0"
           :color="getColor(list.no)"
           > -->
-            <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title>
+            <!-- <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title> -->
             <!-- <v-card-actions>
               <v-btn>{{ area[list.no] }}</v-btn>
             </v-card-actions> -->
+            <div
+            class="d-flex flex-no-wrap justify-space-between"
+            style="float: left;"
+            >
+              <v-avatar
+              class="ms-2"
+              size="100"
+              style="/*background-color: aqua;*/"
+              >
+                <v-img :src='`${"/img/" + ("0000"+list.globalno).slice(-4)+".png"}`'></v-img>
+              </v-avatar>
+              <div
+              style="/*background-color: aqua;*/"
+              >
+                <v-card-title
+                >No.{{ list.no }} {{ list.name }}</v-card-title>
+                <v-card-text></v-card-text>
+              </div>
+            </div>
           </v-card>
         </NuxtLink>
       </v-col>

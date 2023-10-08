@@ -252,6 +252,7 @@ export default defineEventHandler(async (event) => {
         for(var value in areaPokedex["pokedex"][area]){
           pokedex = {}
           pokedex["no"] = areaPokedex["pokedex"][area][value]["no"]
+          pokedex["globalno"] = areaPokedex["pokedex"][area][value]["globalNo"]
           if(pokedex["no"]!=""){
             pokedex["name"] = global["pokedex"][Number(areaPokedex["pokedex"][area][value]["globalNo"])-1]["name"]["jpn"]
             pokedex["type1"] = areaPokedex["pokedex"][area][value]["status"][0]["type1"]
