@@ -9,6 +9,7 @@ const { data: pokedexList} = await useFetch('/api/pokedex?id=1&area='+props.poke
 const pokedex = pokedexList.value.pokedex
 
 const metaTitle = ref(pokedate[1].name+" - "+props.pokedexName)
+const metaImage = ref("https://pokedex-online.jp/img/" + ('0000' + pokedate[1].globalNo).slice( -4 ) + ".png")
 
 var model = ref(0)
 
@@ -74,6 +75,11 @@ useHead({
       hid: 'twitter:title',
       name: 'twitter:title',
       content: metaTitle
+    },
+    {
+      hid: 'twitter:image',
+      name: 'twitter:image',
+      content: metaImage
     }
   ]
 })
