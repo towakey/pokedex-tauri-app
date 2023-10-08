@@ -43,17 +43,27 @@ useHead({
     </v-card>
     </NuxtLink> -->
 
+    <v-row>
     <ContentList path="/blog" v-slot="{ list }">
-      <div v-for="article in list" :key="article._path">
-        <NuxtLink
-        :to="{path: article._path}"
+        <v-col v-for="article in list" :key="article._path"
+        cols="12"
+        sm="6"
         >
-          <v-card>
-            <v-card-title>{{ article.title }}</v-card-title>
-            <v-card-text>{{ article.description }}</v-card-text>
-          </v-card>
-        </NuxtLink>
-      </div>
+          <NuxtLink
+          :to="{path: article._path}"
+          >
+            <v-card
+              :title="article.title"
+              :text="article.description"
+            />
+          </NuxtLink>
+        </v-col>
     </ContentList>
+    </v-row>
   </v-container>
 </template>
+<style>
+a{
+  text-decoration: none;
+}
+</style>
