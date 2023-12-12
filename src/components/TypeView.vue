@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
 
-const props = defineProps(["pokedexArea", "type1", "type2", "pokedate"])
+// const props = defineProps(["pokedexArea", "type1", "type2", "pokedate"])
+const props = defineProps(["pokedexArea", "pokedex"])
 var typeDialog = ref(false)
 
 const typeList: string[] = [
@@ -39,8 +40,7 @@ let damage4 = ref([])
 
 
 for(let val in typeList){
-  // const types = await useFetch('/api/type?game='+gameList[props.pokedexArea]+'&attackType='+typeList[val]+'&defenceType1='+props.type1+'&defenceType2='+props.type2, { refresh: true })
-  const types = props.pokedate.type_list
+  const types = props.pokedex.type_list
   if(types[typeList[val]] == "0"){
     damage0.value[damage0.value.length]=ref(typeList[val])
   }else if(types[typeList[val]] == "0.25"){
@@ -61,42 +61,42 @@ for(let val in typeList){
     @click="typeDialog = true"
   >
     <v-card-title style="display: flex;">
-      <div style="" v-if='type1 === "ノーマル"' class="type_Normal">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "ほのお"' class="type_Fire">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "みず"' class="type_Water">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "でんき"' class="type_Electric">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "くさ"' class="type_Grass">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "こおり"' class="type_Ice">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "かくとう"' class="type_Fighting">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "どく"' class="type_Poison">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "じめん"' class="type_Ground">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "ひこう"' class="type_Flying">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "エスパー"' class="type_Psychic">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "むし"' class="type_Bug">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "いわ"' class="type_Rock">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "ゴースト"' class="type_Ghost">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "ドラゴン"' class="type_Dragon">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "あく"' class="type_Dark">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "はがね"' class="type_Steel">{{ type1 }}</div>
-      <div style="" v-else-if='type1 === "フェアリー"' class="type_Fairy">{{ type1 }}</div>
-      <div style="" v-if='type2 !== "" && type2 === "ノーマル"' class="type_Normal">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "ほのお"' class="type_Fire">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "みず"' class="type_Water">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "でんき"' class="type_Electric">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "くさ"' class="type_Grass">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "こおり"' class="type_Ice">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "かくとう"' class="type_Fighting">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "どく"' class="type_Poison">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "じめん"' class="type_Ground">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "ひこう"' class="type_Flying">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "エスパー"' class="type_Psychic">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "むし"' class="type_Bug">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "いわ"' class="type_Rock">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "ゴースト"' class="type_Ghost">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "ドラゴン"' class="type_Dragon">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "あく"' class="type_Dark">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "はがね"' class="type_Steel">{{ type2 }}</div>
-      <div style="" v-else-if='type2 !== "" && type2 === "フェアリー"' class="type_Fairy">{{ type2 }}</div>
+      <div style="" v-if='pokedex.type1 === "ノーマル"' class="type_Normal">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "ほのお"' class="type_Fire">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "みず"' class="type_Water">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "でんき"' class="type_Electric">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "くさ"' class="type_Grass">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "こおり"' class="type_Ice">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "かくとう"' class="type_Fighting">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "どく"' class="type_Poison">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "じめん"' class="type_Ground">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "ひこう"' class="type_Flying">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "エスパー"' class="type_Psychic">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "むし"' class="type_Bug">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "いわ"' class="type_Rock">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "ゴースト"' class="type_Ghost">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "ドラゴン"' class="type_Dragon">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "あく"' class="type_Dark">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "はがね"' class="type_Steel">{{ pokedex.type1 }}</div>
+      <div style="" v-else-if='pokedex.type1 === "フェアリー"' class="type_Fairy">{{ pokedex.type1 }}</div>
+      <div style="" v-if='pokedex.type2 !== "" && pokedex.type2 === "ノーマル"' class="type_Normal">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "ほのお"' class="type_Fire">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "みず"' class="type_Water">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "でんき"' class="type_Electric">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "くさ"' class="type_Grass">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "こおり"' class="type_Ice">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "かくとう"' class="type_Fighting">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "どく"' class="type_Poison">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "じめん"' class="type_Ground">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "ひこう"' class="type_Flying">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "エスパー"' class="type_Psychic">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "むし"' class="type_Bug">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "いわ"' class="type_Rock">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "ゴースト"' class="type_Ghost">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "ドラゴン"' class="type_Dragon">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "あく"' class="type_Dark">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "はがね"' class="type_Steel">{{ pokedex.type2 }}</div>
+      <div style="" v-else-if='pokedex.type2 !== "" && pokedex.type2 === "フェアリー"' class="type_Fairy">{{ pokedex.type2 }}</div>
     </v-card-title>
   </v-card>
   <ClientOnly>

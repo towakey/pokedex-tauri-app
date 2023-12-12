@@ -8,7 +8,8 @@ defineProps(["description"])
       v-for="(ver, index) in description" :key="index"
     >
       <v-list-item-title>{{ appConfig.verExchange[index] }}</v-list-item-title>
-      <v-list-item-subtitle class="wrap-text">{{ ver }}</v-list-item-subtitle>
+      <v-list-item-subtitle class="wrap-text" v-if="ver !== ''">{{ ver }}</v-list-item-subtitle>
+      <v-list-item-subtitle class="wrap-text" v-else>じょうほう なし</v-list-item-subtitle>
     </v-list-item>
   </v-list>
 </template>

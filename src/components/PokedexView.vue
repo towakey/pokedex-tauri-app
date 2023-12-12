@@ -2,8 +2,8 @@
 import { useStorage } from '@vueuse/core'
 const props = defineProps(["pokedexArea"])
 // const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: props.pokedexArea, type: 'index' }, { refresh: true } })
-const { data: pokedex} = await useFetch('/api/pokedex?id=1&area='+props.pokedexArea+'&type=index', { refresh: true })
-const pokedate = pokedex.value.pokedex
+const pokedex = (await useFetch('/api/v2/pokedex?id=1&area='+props.pokedexArea+'&type=index', { refresh: true })).data.value.pokedex
+// const pokedate = pokedex.value.pokedex
 const Id2Name = pokedexId2Name(props.pokedexArea)
 const metaTitle = ref(Id2Name)
 
@@ -12,8 +12,10 @@ const searchTerm = ref()
 
 // const area = localStorageAreaListGet({area: props.pokedexArea, pokedate: pokedate}).value
 let defval: {[key: string]: string} = {}
-for(let val in pokedate){
-  defval[String(Number(pokedate[val].no))]="0"
+for(let val in pokedex){
+// for(let val in pokedate){
+  // defval[String(Number(pokedate[val].no))]="0"
+  defval[String(Number(pokedex[val].no))]="0"
 }
 const area = useStorage(props.pokedexArea, defval, undefined, {
   serializer: {
@@ -24,8 +26,10 @@ const area = useStorage(props.pokedexArea, defval, undefined, {
 
 onMounted(() => {
   let colors: string
-  for(let val in pokedate){
-    switch(String(area.value[pokedate[val].no])){
+  for(let val in pokedex){
+  // for(let val in pokedate){
+    switch(String(area.value[pokedex[val].no])){
+    // switch(String(area.value[pokedate[val].no])){
       case "0":
       colors = "#dbdbdb"
       break
@@ -38,18 +42,23 @@ onMounted(() => {
       default:
       colors = "#dbdbdb"
     }
-    pokedate[val]["color"] = colors
+    // pokedate[val]["color"] = colors
+    pokedex[val]["color"] = colors
   }
 })
 
 const pokedateItems = computed(() => {
   if(searchTerm.value === ''){
-    return pokedate
+    // return pokedate
+    return pokedex
   }else{
     if(props.pokedexArea === 'global'){
-      return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value))
+      // return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value))
+      return pokedex.filter(item => item.name.jpn.match(searchTerm.value) || item.no.match(searchTerm.value))
     }else{
-      return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
+      // return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
+      // return pokedex.filter(item => item.name.jpn.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
+      return pokedex.filter(item => item.name.jpn.match(searchTerm.value) || item.no.match(searchTerm.value))
     }
   }
 })
@@ -105,7 +114,7 @@ useHead({
           v-model="searchTerm" label="検索(図鑑No / 名前)" />
         <v-text-field
           v-else
-          v-model="searchTerm" label="検索(図鑑No / 名前 / タイプ)" />
+          v-model="searchTerm" label="検索(図鑑No / 名前)" />
       </v-col>
     </v-row>
     <v-row>
@@ -139,14 +148,14 @@ useHead({
               size="100"
               style="/*background-color: aqua;*/"
               >
-                <v-img :src='`${"/img/" + ("0000"+list.no).slice(-4)+".png"}`'></v-img>
+                <v-img :src='`${"/img/" + ("0000"+list.id).slice(-4)+".png"}`'></v-img>
               </v-avatar>
               <div
               style="/*background-color: aqua;*/"
               >
                 <v-card-title
-                >No.{{ list.no }} {{ list.name }}</v-card-title>
-                <v-card-text>{{ pokedexId2GameVersion(list.no) }}</v-card-text>
+                >No.{{ list.id }} {{ list.name.jpn }}</v-card-title>
+                <v-card-text>{{ pokedexId2GameVersion(list.id) }}</v-card-text>
               </div>
             </div>
           </v-card>
@@ -181,13 +190,13 @@ useHead({
               size="100"
               style="/*background-color: aqua;*/"
               >
-                <v-img :src='`${"/img/" + ("0000"+list.globalno).slice(-4)+".png"}`'></v-img>
+                <v-img :src='`${"/img/" + ("0000"+list.globalNo).slice(-4)+".png"}`'></v-img>
               </v-avatar>
               <div
               style="/*background-color: aqua;*/"
               >
                 <v-card-title
-                >No.{{ list.no }} {{ list.name }}</v-card-title>
+                >No.{{ list.no }} {{ list.name.jpn }}</v-card-title>
                 <v-card-text></v-card-text>
               </div>
             </div>

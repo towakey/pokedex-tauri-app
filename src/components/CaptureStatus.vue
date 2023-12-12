@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core'
-const props = defineProps(["pokedexArea","no","pokedex"])
+const props = defineProps(["pokedexArea","pokedex"])
 const stat = ref("")
 
 let defval: {[key: string]: string} = {}
@@ -13,9 +13,9 @@ const area = useStorage(props.pokedexArea, defval, undefined, {
       write: (v: any) => JSON.stringify(v),
     }
 })
-stat.value = area.value[props.no]
+stat.value = area.value[props.pokedex.no]
 const changeStat = (stats) => {
-  area.value[String(props.no)] = stats
+  area.value[String(props.pokedex.no)] = stats
 }
 </script>
 <template>

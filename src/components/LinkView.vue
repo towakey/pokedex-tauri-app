@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  defineProps(["pokedexArea", "pokedexName", "pokedate"])
+  // defineProps(["pokedexArea", "pokedexName", "pokedate"])
+  defineProps(["pokedexArea", "pokedexName", "prev", "next"])
 </script>
 <template>
   <v-card
@@ -8,10 +9,10 @@
     <v-card-actions>
       <v-btn
         variant = "tonal"
-        v-if='pokedate[0] != ""'
-        :to='{path: `/pokedex/${pokedexArea}/${pokedate[0].no}`}'
+        v-if='prev.result'
+        :to='{path: `/pokedex/${pokedexArea}/${prev.no}`}'
         no-prefetch
-      >{{ pokedate[0].name }}</v-btn>
+      >{{ prev.name.jpn }}</v-btn>
       <v-spacer />
       <v-btn
         variant = "tonal"
@@ -20,10 +21,10 @@
       <v-spacer />
       <v-btn
         variant = "tonal"
-        v-if='pokedate[2] != ""'
-        :to='{path: `/pokedex/${pokedexArea}/${pokedate[2].no}`}'
+        v-if='next.result'
+        :to='{path: `/pokedex/${pokedexArea}/${next.no}`}'
         no-prefetch
-      >{{ pokedate[2].name }}</v-btn>
+      >{{ next.name.jpn }}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
