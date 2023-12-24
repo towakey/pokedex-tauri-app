@@ -12,7 +12,6 @@ export default defineEventHandler(async (event) => {
   var pokedex: any
 
   var result: any
-
   
   switch (area_type){
     case "global":
@@ -98,11 +97,20 @@ export default defineEventHandler(async (event) => {
       ver = "Scarlet_Violet"
       pokedex = (await import('~/assets/pokedex/v2/pokedex/Scarlet_Violet/Scarlet_Violet.json')).default.pokedex
       break
+    case "kitakami":
+      area = "キタカミ図鑑"
+      ver = "Scarlet_Violet"
+      pokedex = (await import('~/assets/pokedex/v2/pokedex/Scarlet_Violet/Scarlet_Violet.json')).default.pokedex
+      break
+    case "blueberry":
+      area = "ブルーベリー図鑑"
+      ver = "Scarlet_Violet"
+      pokedex = (await import('~/assets/pokedex/v2/pokedex/Scarlet_Violet/Scarlet_Violet.json')).default.pokedex
+      break
     default:
       area = "global"
-      break
+    break
   }
-
 
   var no: number
   var globalNo: number
@@ -162,6 +170,28 @@ export default defineEventHandler(async (event) => {
         result["weight"] = global[globalNo][""][0].weight
         result["status"] = pokedex[area][no].status
         result["status"].forEach((element, index, status) => {
+          // console.log(element)
+          // console.log(index)
+          // console.log(status[index].form)
+          // ステータス内に分類と高さ重さを追加する
+          // global[globalNo][""].forEach((element, index, form) => {
+          //   console.log(form[index].form)
+          //   if(form[index].form === status[index].form){
+          //     status[index]["classification"] = form[index].classification
+          //     status[index]["height"] = form[index].height
+          //     status[index]["weight"] = form[index].weight
+          //   }
+          // })
+          // global[globalNo]["mega_evolution"].forEach((element, index, form) => {
+          //   console.log(form[index].form)
+          //   if(form[index].form === status[index].form){
+          //     status[index]["classification"] = form[index].classification
+          //     status[index]["height"] = form[index].height
+          //     status[index]["weight"] = form[index].weight
+          //   }
+          // })
+          // status[index]["height"] = global[globalNo][status[index].form].height
+          // status[index]["weight"] = global[globalNo][status[index].form].weight
           if(status[index]["ability1"]!=""){
             status[index]["ability1_description"] = ability[status[index]["ability1"]][ver]
           }else{

@@ -43,6 +43,34 @@ useHead({
       </v-col>
       <v-col cols="12" sm="6">
         <NuxtLink
+          :to="{path: '/pokedex/blueberry'}"
+          class="pokedexLink"
+        >
+          <v-card elevation="0" color="#e3e1e1" class="pokedex-card">
+            <v-card-title>ブルーベリー図鑑</v-card-title>
+            <v-card-text>
+              <p>図鑑総数 242匹</p>
+              <p>ポケットモンスタースカーレット/バイオレット</p>
+            </v-card-text>
+          </v-card>
+        </NuxtLink>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <NuxtLink
+          :to="{path: '/pokedex/kitakami'}"
+          class="pokedexLink"
+        >
+          <v-card elevation="0" color="#e3e1e1" class="pokedex-card">
+            <v-card-title>キタカミ図鑑</v-card-title>
+            <v-card-text>
+              <p>図鑑総数 200匹</p>
+              <p>ポケットモンスタースカーレット/バイオレット</p>
+            </v-card-text>
+          </v-card>
+        </NuxtLink>
+      </v-col>
+      <v-col cols="12" sm="6">
+        <NuxtLink
           :to="{path: '/pokedex/paldea'}"
           class="pokedexLink"
         >

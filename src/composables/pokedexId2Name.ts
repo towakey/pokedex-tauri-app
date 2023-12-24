@@ -52,6 +52,12 @@ export const pokedexId2Name = (type: string) => {
     case "paldea":
       result = "パルデア図鑑"
       break
-  }
+    case "kitakami":
+      result = "キタカミ図鑑"
+      break
+    case "blueberry":
+      result = "ブルーベリー図鑑"
+      break
+    }
   return result
 }

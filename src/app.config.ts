@@ -17,6 +17,8 @@ export default defineAppConfig({
     "crown_tundra": "Sword_Shield",
     "hisui": "LegendsArceus",
     "paldea": "Scarlet_Violet",
+    "kitakami": "Scarlet_Violet",
+    "blueberry": "Scarlet_Violet",
   },
   verExchange: {
     "red": "赤",
@@ -47,5 +49,19 @@ export default defineAppConfig({
     "legendsarceus": "Legendsアルセウス",
     "scarlet": "スカーレット",
     "violet": "バイオレット",
-  }
+  },
+  blogs: [
+    {
+      "no": "1",
+      "title": "シート内のチャートを全削除するマクロ",
+      "contents": "",
+      "tag": []
+    },
+    {
+      "no": "2",
+      "title": "test2",
+      "contents": "test2",
+      "tag": []
+    },
+  ]
 })

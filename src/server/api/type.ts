@@ -111,7 +111,7 @@ export default defineEventHandler(async (event) => {
     }
   }
   return {
-    "result": "type",
+    "query": query,
     "type": result,
   }
 })
