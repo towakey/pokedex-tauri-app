@@ -44,11 +44,11 @@ const pokedateItems = computed(() => {
     return pokedex
   }else{
     if(props.pokedexArea === 'global'){
-      return pokedex.filter(item => item.name.jpn.match(searchTerm.value) || item.no.match(searchTerm.value))
+      return pokedex.filter(item => String(item.name.jpn).match(searchTerm.value) || String(item.no).match(searchTerm.value))
     }else{
       // return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
       // return pokedex.filter(item => item.name.jpn.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
-      return pokedex.filter(item => item.name.jpn.match(searchTerm.value) || item.no.match(searchTerm.value))
+      return pokedex.filter(item => String(item.name.jpn).match(searchTerm.value) || String(item.no).match(searchTerm.value))
     }
   }
 })
