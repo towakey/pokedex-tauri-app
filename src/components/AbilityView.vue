@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
-// const props = defineProps(["ability1", "ability2", "dream_ability", "pokedexArea", "pokedex"])
 const props = defineProps(["pokedex"])
 
 </script>

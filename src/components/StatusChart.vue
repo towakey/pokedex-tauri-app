@@ -8,7 +8,6 @@
         :options="chartOptions"
         :data="chartData"
       />
-      <!-- <p>pokedate:{{ statusData }}</p> -->
     </v-card-text>
   </v-card>
 </template>

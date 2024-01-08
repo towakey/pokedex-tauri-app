@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  // defineProps(["pokedexArea", "pokedexName", "pokedate"])
   defineProps(["pokedexArea", "pokedexName", "prev", "next"])
 </script>
 <template>

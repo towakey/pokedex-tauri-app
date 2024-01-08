@@ -1,8 +1,7 @@
 <script setup lang="ts">
 // import { ClientOnly } from '~~/.nuxt/components';
 
-  // const props = defineProps(["no", "globalNo", "name", "classification", "height", "weight"])
-  const props = defineProps(["pokedex"])
+  const props = defineProps(["pokedex", "index"])
   var nameDialog = ref(false)
   const src = "/img/" + ('0000' + props.pokedex.globalNo).slice( -4 ) + ".png"
   const langList: { [key: string]: string } = {
@@ -23,11 +22,11 @@
       <v-container>
         <v-card>
           <v-card-title>
-            {{ pokedex.name.jpn }}
+            {{ pokedex.status[index].name.jpn }}
           </v-card-title>
           <v-card-text>
             <v-row
-            v-for="(name, key) in pokedex.name"
+            v-for="(name, key) in pokedex.status[index].name"
             :key="name"
             >
               <v-col>
@@ -60,34 +59,17 @@
         width="auto"
         >
           <p>No.{{ pokedex.no }}</p>
-          <!-- <h2>{{ pokedex.name.jpn }}</h2> -->
           <v-card
             @click="nameDialog = true"
           >
-            <v-card-title><h2>{{ pokedex.name.jpn }}</h2></v-card-title>
+            <v-card-title
+            ><h2>{{ pokedex.status[index].name.jpn }}</h2></v-card-title>
           </v-card>
-          <!-- <v-expansion-panels>
-            <v-expansion-panel>
-              <v-expansion-panel-title><h2>{{ pokedex.name.jpn }}</h2></v-expansion-panel-title>
-              <v-expansion-panel-text>
-                <v-list>
-                  <v-list-item
-                    v-for="(name, key) in pokedex.name"
-                    :key="name"
-                  >
-                    <v-list-item-title>
-                      {{ key }} : {{ name }}
-                    </v-list-item-title>
-                  </v-list-item>
-                </v-list>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-          </v-expansion-panels> -->
           <p>{{ pokedex.classification }}</p>
         </v-card-title>
         <v-card-text>
-          <h2>たかさ:{{ (''+pokedex.height).slice(-4) }}m</h2>
-          <h2>おもさ:{{ (''+pokedex.weight).slice(-4) }}kg</h2>
+          <h2>たかさ:{{ (''+pokedex.status[index].height).slice(-4) }}m</h2>
+          <h2>おもさ:{{ (''+pokedex.status[index].weight).slice(-4) }}kg</h2>
         </v-card-text>
       </v-card>
     </v-col>

@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core'
 const props = defineProps(["pokedexArea"])
-// const { data: pokedex} = await useFetch('/api/pokedex', { query: { id: 1, area: props.pokedexArea, type: 'index' }, { refresh: true } })
 const pokedex = (await useFetch('/api/v2/pokedex?id=1&area='+props.pokedexArea+'&type=index', { refresh: true })).data.value.pokedex
-// const pokedate = pokedex.value.pokedex
 const Id2Name = pokedexId2Name(props.pokedexArea)
 const metaTitle = ref(Id2Name)
 
 const searchTerm = ref()
 
 
-// const area = localStorageAreaListGet({area: props.pokedexArea, pokedate: pokedate}).value
 let defval: {[key: string]: string} = {}
 for(let val in pokedex){
-// for(let val in pokedate){
-  // defval[String(Number(pokedate[val].no))]="0"
   defval[String(Number(pokedex[val].no))]="0"
 }
 const area = useStorage(props.pokedexArea, defval, undefined, {
@@ -27,9 +22,7 @@ const area = useStorage(props.pokedexArea, defval, undefined, {
 onMounted(() => {
   let colors: string
   for(let val in pokedex){
-  // for(let val in pokedate){
     switch(String(area.value[pokedex[val].no])){
-    // switch(String(area.value[pokedate[val].no])){
       case "0":
       colors = "#dbdbdb"
       break
@@ -42,18 +35,15 @@ onMounted(() => {
       default:
       colors = "#dbdbdb"
     }
-    // pokedate[val]["color"] = colors
     pokedex[val]["color"] = colors
   }
 })
 
 const pokedateItems = computed(() => {
   if(searchTerm.value === ''){
-    // return pokedate
     return pokedex
   }else{
     if(props.pokedexArea === 'global'){
-      // return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value))
       return pokedex.filter(item => item.name.jpn.match(searchTerm.value) || item.no.match(searchTerm.value))
     }else{
       // return pokedate.filter(item => item.name.match(searchTerm.value) || item.no.match(searchTerm.value) || item.type1.match(searchTerm.value) || item.type2.match(searchTerm.value))
@@ -133,12 +123,6 @@ useHead({
           elevation="0"
           color="#e3e1e1"
           >
-            <!-- <v-card-title class="text-h5">
-              <span class="pokemonName">No.{{ list.no }} {{ list.name }}</span>
-            </v-card-title>
-            <v-card-text>
-              <span class="gameVersion">{{ pokedexId2GameVersion(list.no) }}</span>
-            </v-card-text> -->
             <div
             class="d-flex flex-no-wrap justify-space-between"
             style="float: left;"
@@ -165,22 +149,6 @@ useHead({
           elevation="0"
           :color="list.color"
           >
-          <!-- <v-card
-          v-else
-          class=""
-          elevation="0"
-          :color="pokedexColor[list.no-1]"
-          > -->
-          <!-- <v-card
-          v-else
-          class=""
-          elevation="0"
-          :color="getColor(list.no)"
-          > -->
-            <!-- <v-card-title>No.{{ list.no }} {{ list.name }}</v-card-title> -->
-            <!-- <v-card-actions>
-              <v-btn>{{ area[list.no] }}</v-btn>
-            </v-card-actions> -->
             <div
             class="d-flex flex-no-wrap justify-space-between"
             style="float: left;"

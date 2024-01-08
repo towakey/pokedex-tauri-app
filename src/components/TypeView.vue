@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
 
-// const props = defineProps(["pokedexArea", "type1", "type2", "pokedate"])
 const props = defineProps(["pokedexArea", "pokedex"])
 var typeDialog = ref(false)
 

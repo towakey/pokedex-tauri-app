@@ -146,6 +146,9 @@ export default defineEventHandler(async (event) => {
         result["classification"] = global[no - 1][""][0].classification
         result["height"] = global[no - 1][""][0].height
         result["weight"] = global[no - 1][""][0].weight
+        result["status"] = []
+        result["status"][0] = {}
+        result["status"][0]["name"] = global[no - 1].name
       }
     }else{
       // BlackWhite(2)では図鑑番号は0から始まる
@@ -174,22 +177,71 @@ export default defineEventHandler(async (event) => {
           // console.log(index)
           // console.log(status[index].form)
           // ステータス内に分類と高さ重さを追加する
-          // global[globalNo][""].forEach((element, index, form) => {
-          //   console.log(form[index].form)
-          //   if(form[index].form === status[index].form){
-          //     status[index]["classification"] = form[index].classification
-          //     status[index]["height"] = form[index].height
-          //     status[index]["weight"] = form[index].weight
-          //   }
-          // })
-          // global[globalNo]["mega_evolution"].forEach((element, index, form) => {
-          //   console.log(form[index].form)
-          //   if(form[index].form === status[index].form){
-          //     status[index]["classification"] = form[index].classification
-          //     status[index]["height"] = form[index].height
-          //     status[index]["weight"] = form[index].weight
-          //   }
-          // })
+          global[globalNo][""].forEach((element, idx, form) => {
+            if(form[idx].form === status[index].form){
+              status[index]["name"] = global[globalNo].name
+              status[index]["classification"] = form[idx].classification
+              status[index]["height"] = form[idx].height
+              status[index]["weight"] = form[idx].weight
+            }
+          })
+
+          // リージョンフォーム
+          // 存在チェック
+          if(global[globalNo].region_form){
+            global[globalNo]["region_form"].forEach((element, idx, form) => {
+              // console.log("global=>"+form[idx].form)
+              // console.log("status=>"+status[index].form)
+              if(form[idx].form === status[index].form){
+                status[index]["name"] = global[globalNo].name
+                status[index]["classification"] = form[idx].classification
+                status[index]["height"] = form[idx].height
+                status[index]["weight"] = form[idx].weight
+              }
+            })
+          }
+          // メガシンカ
+          // 存在チェック
+          if(global[globalNo].mega_evolution){
+            global[globalNo]["mega_evolution"].forEach((element, idx, form) => {
+              // console.log("global=>"+form[idx].name.jpn)
+              // console.log("status=>"+status[index].form)
+              if(form[idx].name.jpn === status[index].form){
+                status[index]["name"] = form[idx].name
+                status[index]["classification"] = form[idx].classification
+                status[index]["height"] = form[idx].height
+                status[index]["weight"] = form[idx].weight
+              }
+            })
+          }
+          // ゲンシカイキ
+          // 存在チェック
+          if(global[globalNo].primal_reversion){
+            global[globalNo]["primal_reversion"].forEach((element, idx, form) => {
+              // console.log("global=>"+form[idx].name.jpn)
+              // console.log("status=>"+status[index].form)
+              if(form[idx].name.jpn === status[index].form){
+                status[index]["name"] = form[idx].name
+                status[index]["classification"] = form[idx].classification
+                status[index]["height"] = form[idx].height
+                status[index]["weight"] = form[idx].weight
+              }
+            })
+          }
+          // キョダイマックス
+          // 存在チェック
+          if(global[globalNo].gigantamax){
+            global[globalNo]["gigantamax"].forEach((element, idx, form) => {
+              // console.log("global=>"+form[idx].form)
+              // console.log("status=>"+status[index].form)
+              if(form[idx].form === status[index].form){
+                status[index]["name"] = form[idx].name
+                status[index]["classification"] = form[idx].classification
+                status[index]["height"] = form[idx].height
+                status[index]["weight"] = form[idx].weight
+              }
+            })
+          }
           // status[index]["height"] = global[globalNo][status[index].form].height
           // status[index]["weight"] = global[globalNo][status[index].form].weight
           if(status[index]["ability1"]!=""){
