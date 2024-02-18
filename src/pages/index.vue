@@ -43,6 +43,17 @@ definePageMeta({
           </v-card>
         </a>
       </v-col>
+      <v-col>
+        <a href="/camera"
+        class="link-decoration"
+        >
+          <v-card>
+            <v-card-title
+              style="text-align:center"
+            >図鑑カメラ</v-card-title>
+          </v-card>
+        </a>
+      </v-col>
     </v-row>
   </v-container>
 </template>

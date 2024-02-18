@@ -149,6 +149,8 @@ export default defineEventHandler(async (event) => {
         result["status"] = []
         result["status"][0] = {}
         result["status"][0]["name"] = global[no - 1].name
+        result["status"][0]["height"] = global[no - 1][""][0].height
+        result["status"][0]["weight"] = global[no - 1][""][0].weight
       }
     }else{
       // BlackWhite(2)では図鑑番号は0から始まる

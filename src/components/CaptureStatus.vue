@@ -29,7 +29,7 @@ const changeStat = (stats) => {
   v-else-if="stat == '2'"
   >捕獲済み</p> -->
   <!-- <p>{{ stat }}</p> -->
-  <v-radio-group
+  <!-- <v-radio-group
   v-model="stat"
   inline
   label="図鑑の状態"
@@ -49,5 +49,24 @@ const changeStat = (stats) => {
     value="2"
     @click="changeStat('2')"
     ></v-radio>
-  </v-radio-group>
+  </v-radio-group> -->
+  <p>図鑑の状態</p>
+  <v-btn-toggle
+  v-model="stat"
+  color="deep-purple-accent-3"
+  group
+  >
+    <v-btn
+    value="0"
+    @click="changeStat('0')"
+    >未発見</v-btn>
+    <v-btn
+    value="1"
+    @click="changeStat('1')"
+    >発見</v-btn>
+    <v-btn
+    value="2"
+    @click="changeStat('2')"
+    >捕獲済み</v-btn>
+  </v-btn-toggle>
 </template>
