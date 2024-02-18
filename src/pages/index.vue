@@ -11,7 +11,7 @@ definePageMeta({
           :to="{path: '/pokedex'}"
           class="link-decoration"
         >
-          <v-card>
+          <v-card elevation="0" color="#e3e1e1" >
             <v-card-title
               style="text-align:center"
             >ポケモン図鑑</v-card-title>
@@ -23,7 +23,7 @@ definePageMeta({
           :to="{path: '/webapp'}"
           class="link-decoration"
         >
-          <v-card>
+          <v-card elevation="0" color="#e3e1e1" >
             <v-card-title
               style="text-align:center"
             >WEBアプリ</v-card-title>
@@ -36,7 +36,7 @@ definePageMeta({
         <a href="/blog"
         class="link-decoration"
         >
-          <v-card>
+          <v-card elevation="0" color="#e3e1e1" >
             <v-card-title
               style="text-align:center"
             >ブログ</v-card-title>
@@ -47,7 +47,7 @@ definePageMeta({
         <a href="/camera"
         class="link-decoration"
         >
-          <v-card>
+          <v-card elevation="0" color="#e3e1e1" >
             <v-card-title
               style="text-align:center"
             >図鑑カメラ</v-card-title>
