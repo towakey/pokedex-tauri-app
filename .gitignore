@@ -31,3 +31,6 @@ dist-ssr
 .output
 .env
 src/assets/pokedex
+
+[*]
+tabwidth = 2
